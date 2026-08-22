@@ -1,0 +1,263 @@
+@import 'mocha.css';
+
+* {
+  all: unset;
+  font-family: 'RecMonoLinear Nerd Font';
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* TOOLTIP */
+tooltip {
+  background: @surface0;
+  border: 2px solid alpha(@mauve, 0.5);
+  border-radius: 20px;
+}
+
+tooltip label {
+  color: @flamingo;
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px 5px;
+}
+
+#workspaces {
+  background-color: @surface0;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 25px;
+}
+
+#workspaces button {
+  background: alpha(@mauve, 0.9);
+  color: @surface0;
+  min-width: 20px;
+  margin: 1px;
+  border-radius: 25px;
+  transition: all 0.2s ease-in-out;
+  padding: 1px;
+  opacity: 0.8;
+}
+
+#workspaces button.active {
+  background: @pink;
+  min-width: 35px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:nth-child(1) {
+  padding-left: 0px;
+}
+
+#workspaces button:hover {
+  color: @crust;
+  background-color: @rosewater;
+}
+
+#workspaces button.urgent {
+  color: #e10a32;
+  transition: all 0.3s ease-in-out;
+}
+
+#cava {
+  background-color: @base;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid alpha(@surface2, 0.3);
+  border-radius: 10px;
+}
+
+/* NETWORK */
+#network {
+  color: alpha(@teal, 0.9);
+  background-color: @surface0;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+}
+
+#network:hover {
+  background-color: alpha(@teal, 0.7);
+  border: 2px solid alpha(@sky, 0.9);
+  color: @crust;
+}
+
+#network.disconnected {
+  color: alpha(@red, 0.9);
+  background-color: @surface0;
+  border: 2px dotted alpha(@maroon, 0.3);
+}
+
+/* HARDWARE */
+#hardware {
+  background-color: @surface0;
+  border: 2px solid alpha(@crust, 0.5);
+  border-radius: 20px;
+  padding-right: 6px;
+}
+#temperature {
+  color: alpha(@lavender, 0.9);
+}
+#memory {
+  color: alpha(@flamingo, 0.9);
+}
+#cpu {
+  color: alpha(@peach, 0.9);
+}
+/* BLUETOOTH */
+#bluetooth {
+  color: alpha(@blue, 1);
+  background-color: @surface0;
+  padding-left: 6px;
+  padding-right: 6px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+}
+
+#bluetooth:hover {
+  color: @crust;
+  background-color: alpha(@blue, 0.8);
+  border: 2px solid alpha(@lavender, 0.9);
+}
+
+/* BACKLIGHT */
+#backlight {
+  color: alpha(@yellow, 0.8);
+  background-color: @surface0;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#backlight:hover {
+  color: @crust;
+  background-color: alpha(@yellow, 0.7);
+  border: 2px solid alpha(@peach, 0.8);
+}
+
+/* AUDIO */
+#pulseaudio {
+  background-color: @surface0;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+}
+
+#pulseaudio.speaker {
+  color: alpha(@lavender, 0.9);
+  background-color: @surface0;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+#pulseaudio.speaker.muted {
+  color: alpha(@red, 0.9);
+  padding-right: 10px;
+  transition: all 0.2s ease-in-out;
+  border: 2px dashed alpha(@red, 0.7);
+}
+
+#pulseaudio:hover {
+  color: @crust;
+  background-color: alpha(@lavender, 0.7);
+  border: 2px solid alpha(@mauve, 0.9);
+}
+
+#pulseaudio.speaker.muted:hover {
+  color: @crust;
+  background-color: alpha(@red, 0.7);
+  border-color: alpha(@flamingo, 0.9);
+}
+
+#pulseaudio.microphone.source-muted {
+  color: alpha(@red, 0.9);
+  background-color: @surface0;
+  border: 2px dotted alpha(@red, 0.7);
+  border-radius: 9px;
+  padding-right: 9px;
+  padding-left: 1px;
+}
+
+/* BATTERY */
+
+#battery {
+  background-color: @surface0;
+  margin: 1px 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: alpha(@green, 0.9);
+  border: 2px dotted alpha(@green, 0.5);
+}
+
+#battery.discharging {
+  color: alpha(@green, 0.9);
+}
+
+@keyframes discharging-border {
+  0% {
+    border-color: alpha(@crust, 0.3);
+    border-width: 2px;
+  }
+  100% {
+    border-color: @red;
+    border-width: 2px;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: alpha(@red, 0.9);
+  border-width: 2px;
+  animation: discharging-border 1s ease-in-out infinite alternate;
+}
+
+#battery:hover {
+  color: @crust;
+  background-color: alpha(@green, 0.7);
+  border: 2px solid alpha(@teal, 0.9);
+}
+
+/* CLOCK */
+#clock {
+  color: alpha(@pink, 0.9);
+  background-color: @surface0;
+  margin: 1px 1px;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#clock:hover {
+  color: @crust;
+  background-color: alpha(@pink, 0.7);
+  border: 2px solid alpha(@rosewater, 0.9);
+}
+
+#custom-notification {
+  background-color: alpha(@surface0, 0.7);
+  color: @green;
+  border: 2px solid alpha(@crust, 0.3);
+  border-radius: 100px;
+  padding-right: 6px;
+  padding-left: 1px;
+}

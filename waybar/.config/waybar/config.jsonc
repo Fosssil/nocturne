@@ -1,0 +1,193 @@
+{
+  // "font": "RecMonoLinear Nerd Font Propo",
+  "font": "Maple Mono NF",
+  "reload_style_on_change": true,
+  // "width": 1920,
+  "spacing": 1,
+  "modules-left": ["hyprland/workspaces"],
+  // "modules-center": [
+  // 	"cava"
+  // ],
+  "modules-right": [
+    "pulseaudio#microphone",
+    "network",
+    // "group/hardware",
+    "backlight",
+    "pulseaudio#speaker",
+    "battery",
+    "clock",
+    "custom/notification",
+  ],
+  //////////////
+  // Hyprland //
+  //////////////
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "sort-by": "number",
+    "all-outputs": true,
+    "tooltip": false,
+    "on-click": "date >> /home/fossil/waybar-clicks",
+    "format": "{icon}",
+  },
+  //////////
+  // Cava //
+  //////////
+  "cava": {
+    "cava_config": "/home/fossil/.config/cava/config",
+    "framerate": 60,
+    "autosens": 1,
+    "bars": 20,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "sleep_timer": 2,
+    "hide_on_silence": true,
+    "method": "pipewire",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": true,
+    "waves": true,
+    "noise_reduction": 0.45,
+    "input_delay": 0,
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+  },
+  ///////////////////
+  // Network setup //
+  ///////////////////
+  "network": {
+    "format": "\uf063 {bandwidthDownBytes} \uf062 {bandwidthUpBytes}",
+    "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-disconnected": " Disconnected",
+    "tooltip-format-wifi": "  {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "  {ifname}",
+    "max-length": 50,
+    "interval": 1,
+  },
+  ///////////////
+  // Bluetooth //
+  ///////////////
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": " {device_alias}",
+    "on-click-right": "blueman-manager",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+  },
+  ////////////////
+  // Backlight ///
+  ////////////////
+  "backlight": {
+    "scroll-step": 5,
+    "format": "{icon} {percent}",
+    "tooltip": false,
+    "min-brightness": 5,
+    "format-icons": ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
+  },
+  /////////////////
+  // Audio setup //
+  /////////////////
+  "pulseaudio#speaker": {
+    "format": "{icon}  {volume}",
+    "format-muted": "",
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol",
+    "scroll-step": 5,
+    "tooltip": false,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "default": ["", "", "", "", ""],
+    },
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "on-click": "pamixer --default-source -t",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "pamixer --default-source -i 5",
+    "on-scroll-down": "pamixer --default-source -d 5",
+    "scroll-step": 5,
+  },
+  /////////////
+  // Battery //
+  /////////////
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 40,
+      "critical": 20,
+    },
+    "interval": 10,
+    "format": "{icon} {capacity}%",
+    "tooltip": false,
+    "format-icons": {
+      "default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+      "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+    },
+  },
+  ///////////
+  // Clock //
+  ///////////
+  "clock": {
+    "format": "󱑂 {:%I:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "󰨳 {:%d %b %Y}", // 25 Dec 2006
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<span color='#cba6f7'>{}</span>",
+        "days": "<span color='#cdd6f4'>{}</span>",
+        "weeks": "<span color='#f9e2af'>W{}</span>",
+        "weekdays": "<span color='#fab387'>{}</span>",
+        "today": "<span color='#11111b' bgcolor='#f38ba8'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+  //////////////////
+  // Notification //
+  //////////////////
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+      "dnd-none": " ",
+    },
+    "return-type": "json",
+    "exec-if": "command -v swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+    "escape": true,
+  },
+  ///////////////////
+  // Hardware info //
+  ///////////////////
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": ["temperature", "memory", "cpu"],
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "interval": 5,
+    "format": " {icon} {temperatureC}°C",
+    "tooltip": false,
+    "format-icons": ["", "", "", "", ""],
+  },
+  "memory": {
+    "format": "   {}%",
+    "interval": 1,
+  },
+  "cpu": {
+    "format": "   {usage}%",
+    "interval": 1,
+  },
+}
