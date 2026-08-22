@@ -66,3 +66,99 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+
+-- Move/resize windows with mainMod + LMB/RMB and dragging
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- Laptop multimedia keys for volume and LCD brightness
+hl.bind(
+	"XF86AudioRaiseVolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86AudioLowerVolume",
+	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86AudioMute",
+	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86AudioMicMute",
+	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86MonBrightnessUp",
+	hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86MonBrightnessDown",
+	hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),
+	{ locked = true, repeating = true }
+)
+
+-- ─[ Window Resize ]───────────────────────────────────────────────
+
+local resizeStep = 40
+
+hl.bind(
+	mainMod .. " + SHIFT + left",
+	hl.dsp.window.resize({ x = -resizeStep, y = 0, relative = true }),
+	{ repeating = true, description = "Resize window left" }
+)
+
+hl.bind(
+	mainMod .. " + SHIFT + right",
+	hl.dsp.window.resize({ x = resizeStep, y = 0, relative = true }),
+	{ repeating = true, description = "Resize window right" }
+)
+
+hl.bind(
+	mainMod .. " + SHIFT + up",
+	hl.dsp.window.resize({ x = 0, y = -resizeStep, relative = true }),
+	{ repeating = true, description = "Resize window up" }
+)
+
+hl.bind(
+	mainMod .. " + SHIFT + down",
+	hl.dsp.window.resize({ x = 0, y = resizeStep, relative = true }),
+	{ repeating = true, description = "Resize window down" }
+)
+
+hl.bind(
+	mainMod .. " + J",
+	hl.dsp.layout("togglesplit"),
+	{ description = "Toggle split orientation" }
+)
+
+-- Example window rules that are useful
+-- Ignore maximize requests from all apps. You'll probably like this.
+
+local suppressMaximizeRule = hl.window_rule({
+	name = "suppress-maximize-events",
+	match = { class = ".*" },
+
+	suppress_event = "maximize",
+})
+-- suppressMaximizeRule:set_enabled(false)
+
+-- Fix some dragging issues with XWayland
+hl.window_rule({
+	name = "fix-xwayland-drags",
+	match = {
+		class = "^$",
+		title = "^$",
+		xwayland = true,
+		float = true,
+		fullscreen = false,
+		pin = false,
+	},
+
+	no_focus = true,
+})
