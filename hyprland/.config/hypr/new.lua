@@ -17,3 +17,4 @@ end)
 
 require("nocturne/monitors")
 require("nocturne/binds")
+require("nocturne/autostart")
