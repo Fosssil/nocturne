@@ -5,7 +5,6 @@
 
 local mainMod = "SUPER"
 local secondMod = "ALT"
-local shiftMod = "SHIFT"
 
 -- ─[ Applications ]──────────────────────────────────────────────────
 
@@ -40,7 +39,7 @@ hl.bind(
 	),
 	{ description = "Open calculator" }
 )
-
+-- Clipboard
 hl.bind(
 	secondMod .. " + V",
 	hl.dsp.exec_cmd(
@@ -48,14 +47,28 @@ hl.bind(
 	),
 	{ description = "Open Clipboard" }
 )
+-- Screenshot
+hl.bind(
+	"" .. " + PRINT",
+	hl.dsp.exec_cmd("hyprshot -m output --freeze --output-folder /home/$USER/Pictures/Screenshots"),
+	{
+		description = "Take full Screenshot",
+	}
+)
+
+hl.bind(
+	"SHIFT" .. " + PRINT",
+	hl.dsp.exec_cmd("hyprshot -m region --freeze --output-folder /home/$USER/Pictures/Screenshots"),
+	{
+		description = "Take regional Screenshot",
+	}
+)
+
 -- ─[ Window Management ]────────────────────────────────────────────
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close active window" })
-
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen(), { description = "Toggle fullscreen" })
-
 hl.bind(mainMod .. " + V", hl.dsp.window.float(), { description = "Toggle floating" })
-
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo(), { description = "Toggle pseudotiling" })
 
 -- Move focus with mainMod + arrow keys
@@ -85,26 +98,31 @@ hl.bind(
 	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
 	{ locked = true, repeating = true }
 )
+
 hl.bind(
 	"XF86AudioLowerVolume",
 	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
 	{ locked = true, repeating = true }
 )
+
 hl.bind(
 	"XF86AudioMute",
 	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
 	{ locked = true, repeating = true }
 )
+
 hl.bind(
 	"XF86AudioMicMute",
 	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
 	{ locked = true, repeating = true }
 )
+
 hl.bind(
 	"XF86MonBrightnessUp",
 	hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),
 	{ locked = true, repeating = true }
 )
+
 hl.bind(
 	"XF86MonBrightnessDown",
 	hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),
