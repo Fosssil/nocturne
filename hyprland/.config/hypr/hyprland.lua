@@ -15,6 +15,13 @@ hl.on("hyprland.shutdown", function()
 	os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
 end)
 
+--  Remove this section to some other file
+hl.config({
+	render = {
+		expand_undersized_textures = false,
+	},
+})
+
 require("nocturne/monitors")
 require("nocturne/binds")
 require("nocturne/autostart")
