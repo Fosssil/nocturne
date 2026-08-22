@@ -4,14 +4,17 @@
 --==========================================================
 
 hl.on("hyprland.start", function()
-	-- Theme / environment initialization
-	-- hl.exec_cmd("~/.config/hypr/scripts/theme.sh")
+	-- ─[ Clipboard ]─────────────────────────────────────────
 
-	-- Clipboard history
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
-	hl.exec_cmd("waybar")
 
-	-- OSD daemon
+	-- ─[ Desktop ]───────────────────────────────────────────
+
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("hyprpaper")
+
+	-- ─[ OSD ]───────────────────────────────────────────────
+
 	hl.exec_cmd("swayosd-server")
 end)
