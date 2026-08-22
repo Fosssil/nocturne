@@ -40,6 +40,14 @@ hl.bind(
 	),
 	{ description = "Open calculator" }
 )
+
+hl.bind(
+	secondMod .. " + V",
+	hl.dsp.exec_cmd(
+		"cliphist list | rofi -dmenu -p 'Clipboard' -i -theme ~/.config/rofi/clipboard/theme.rasi | cliphist decode | wl-copy"
+	),
+	{ description = "Open Clipboard" }
+)
 -- ─[ Window Management ]────────────────────────────────────────────
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close active window" })
