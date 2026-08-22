@@ -49,7 +49,7 @@ hl.bind(
 )
 -- Screenshot
 hl.bind(
-	"" .. " + PRINT",
+	"PRINT",
 	hl.dsp.exec_cmd("hyprshot -m output --freeze --output-folder /home/$USER/Pictures/Screenshots"),
 	{
 		description = "Take full Screenshot",
@@ -57,12 +57,14 @@ hl.bind(
 )
 
 hl.bind(
-	"SHIFT" .. " + PRINT",
+	"SHIFT + PRINT",
 	hl.dsp.exec_cmd("hyprshot -m region --freeze --output-folder /home/$USER/Pictures/Screenshots"),
 	{
 		description = "Take regional Screenshot",
 	}
 )
+-- Lock Screen
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"), { description = "Lock Screen" })
 
 -- ─[ Window Management ]────────────────────────────────────────────
 
