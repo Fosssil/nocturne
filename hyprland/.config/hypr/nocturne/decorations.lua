@@ -1,16 +1,19 @@
+local colors = require("themes.catppuccin-mocha")
 hl.config({
 	general = {
-		border_size = 1,
+		border_size = 2,
 
 		gaps_in = 6,
 		gaps_out = 20,
 		float_gaps = 0,
 		gaps_workspaces = 0,
 
-		-- Border colors:
-		-- inactive → Catppuccin Mocha subtle neutral
-		-- active   → Catppuccin Mocha Mauve
-		-- nogroup  → to be finalized
+		col = {
+			active_border = colors.mauve,
+			inactive_border = colors.surface1,
+			nogroup_border = colors.peach,
+			nogroup_border_active = colors.red,
+		},
 
 		no_focus_fallback = false,
 
@@ -28,7 +31,7 @@ hl.config({
 		rounding_power = 4.0,
 
 		active_opacity = 0.94,
-		inactive_opacity = 0.92,
+		inactive_opacity = 0.90,
 		fullscreen_opacity = 1.0,
 
 		dim_modal = true,
@@ -68,8 +71,9 @@ hl.config({
 			render_power = 3,
 			sharp = false,
 
-			color = "0xee1a1a1a",
+			-- color = "0xee1a1a1a",
 			-- color_inactive = "0xaa11111b",
+			color = "#" .. colors.crustAlpha .. "cc",
 			offset = { 0, 2 },
 			scale = 1.0,
 		},
