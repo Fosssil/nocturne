@@ -18,5 +18,6 @@ require("nocturne.config")
 require("nocturne.layout")
 require("nocturne.gestures")
 require("nocturne.decorations")
+require("nocturne.animations")
 
 local colors = require("themes.catppuccin-mocha")
