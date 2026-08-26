@@ -1,0 +1,178 @@
+-- ~/.config/nvim/lua/plugins/lualine.lua
+return {
+	"nvim-lualine/lualine.nvim",
+
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"lewis6991/gitsigns.nvim",
+	},
+
+	config = function()
+		local function buffer_count()
+			local count = 0
+
+			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+				if vim.bo[buf].buflisted then
+					count = count + 1
+				end
+			end
+
+			if count <= 1 then
+				return ""
+			end
+
+			return "󰓩 " .. count
+		end
+
+		require("lualine").setup({
+			options = {
+				theme = "catppuccin-nvim",
+				globalstatus = true,
+				icons_enabled = true,
+				always_divide_middle = true,
+
+				component_separators = {
+					left = "│",
+					right = "│",
+				},
+
+				section_separators = {
+					left = "",
+					right = "",
+				},
+			},
+
+			----------------------------------------------------------------
+			-- Statusline
+			----------------------------------------------------------------
+			sections = {
+				------------------------------------------------------------
+				-- Left
+				------------------------------------------------------------
+				lualine_a = {
+					{
+						"mode",
+						icon = "",
+					},
+				},
+
+				lualine_b = {
+					{
+						"filename",
+						symbols = {
+							modified = " [Modified]",
+							readonly = " 󰌾",
+							unnamed = "[No Name]",
+							newfile = "[New]",
+						},
+					},
+					buffer_count,
+				},
+
+				lualine_c = {
+					{
+						"branch",
+						icon = "",
+					},
+
+					{
+						"diff",
+						symbols = {
+							added = "󰐕 ",
+							modified = "󰏫 ",
+							removed = "󰍵 ",
+						},
+						colored = true,
+						cond = function()
+							return vim.b.gitsigns_head ~= nil
+						end,
+					},
+
+					{
+						"diagnostics",
+						sources = { "nvim_diagnostic" },
+						update_in_insert = false,
+
+						symbols = {
+							error = " ",
+							warn = " ",
+							info = " ",
+							hint = " ",
+						},
+					},
+				},
+
+				------------------------------------------------------------
+				-- Right
+				------------------------------------------------------------
+				lualine_x = {
+					function()
+						local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+						if #clients == 0 then
+							return ""
+						end
+
+						return " " .. clients[1].name
+					end,
+
+					{
+						"filetype",
+						icon_only = false,
+					},
+				},
+
+				lualine_y = {
+					"progress",
+				},
+
+				lualine_z = {
+					"location",
+				},
+			},
+
+			----------------------------------------------------------------
+			-- Tabline
+			----------------------------------------------------------------
+			--[[ tabline = {
+				lualine_a = {
+					{
+						"buffers",
+
+						show_filename_only = true,
+						hide_filename_extension = false,
+						show_modified_status = true,
+
+						mode = 0,
+
+						max_length = function()
+							return vim.o.columns
+						end,
+
+						use_mode_colors = true,
+
+						symbols = {
+							modified = " ●",
+							alternate_file = "#",
+							directory = "",
+						},
+					},
+				},
+
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = {},
+				lualine_y = {},
+				lualine_z = {},
+			}, ]]
+
+			extensions = {
+				"lazy",
+				"fzf",
+				"nvim-tree",
+				"mason",
+				"oil",
+			},
+		})
+	end,
+}

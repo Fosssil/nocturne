@@ -1,0 +1,26 @@
+# ~/.config/nvim/stylua.toml
+
+# Lua version we target
+syntax = "Lua54"
+
+# Indentation
+indent_type = "Spaces"
+indent_width = 2
+
+# Maximum line length before wrapping
+column_width = 100
+
+# Unix line endings
+line_endings = "Unix"
+
+# Quote style
+quote_style = "AutoPreferDouble"
+
+# Call parentheses
+call_parentheses = "Always"
+
+# Collapse simple tables when appropriate
+collapse_simple_statement = "Never"
+
+# Don't automatically reorder requires
+sort_requires = false

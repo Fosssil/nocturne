@@ -1,0 +1,126 @@
+-- ~/.config/nvim/lua/plugins/lualine.lua
+return {
+	"nvim-lualine/lualine.nvim",
+
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"lewis6991/gitsigns.nvim",
+	},
+
+	config = function()
+		require("lualine").setup({
+			options = {
+
+				theme = "catppuccin-nvim",
+				globalstatus = true,
+				icons_enabled = true,
+				always_divide_middle = true,
+
+				component_separators = {
+					left = "│",
+					right = "│",
+				},
+
+				section_separators = {
+					-- left = "",
+					-- right = "",
+					left = "",
+					right = "",
+				},
+			},
+
+			sections = {
+				----------------------------------------------------------------
+				-- Left
+				----------------------------------------------------------------
+				lualine_a = {
+					{
+						"mode",
+						icon = "",
+					},
+				},
+
+				lualine_b = {
+					{
+						"filename",
+						symbols = {
+							modified = " [Modified]",
+							readonly = " 󰌾",
+							unnamed = "[No Name]",
+							newfile = "[New]",
+						},
+					},
+				},
+
+				lualine_c = {
+					{
+						"branch",
+						icon = "",
+					},
+
+					{
+						"diff",
+						symbols = {
+							added = "󰐕 ",
+							modified = "󰏫 ",
+							removed = "󰍵 ",
+						},
+						colored = true,
+						cond = function()
+							return vim.b.gitsigns_head ~= nil
+						end,
+					},
+
+					{
+						"diagnostics",
+						symbols = {
+							error = " ",
+							warn = " ",
+							info = " ",
+							hint = " ",
+						},
+						sources = { "nvim_diagnostic" },
+						update_in_insert = false,
+					},
+				},
+
+				----------------------------------------------------------------
+				-- Right
+				----------------------------------------------------------------
+				lualine_x = {
+					function()
+						local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+						if #clients == 0 then
+							return ""
+						end
+
+						return " " .. clients[1].name
+					end,
+
+					{
+						"filetype",
+						icon_only = false,
+					},
+				},
+
+				lualine_y = {
+					{
+						"progress",
+					},
+				},
+
+				lualine_z = {
+					"location",
+				},
+			},
+
+			extensions = {
+				"lazy",
+				"fzf",
+				"nvim-tree",
+				"mason",
+			},
+		})
+	end,
+}
