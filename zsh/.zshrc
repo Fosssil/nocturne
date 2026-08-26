@@ -94,7 +94,7 @@ alias la='eza -a --icons --group-directories-first --git --time-style=relative -
 alias ls='eza -l --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
 alias ll='eza -al --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
 
-alias reflector='sudo reflector --protocol https --latest 100 --sort rate --number 50 --save /etc/pacman.d/mirrorlist'
+alias reflector='sudo reflector --protocol https --latest 100 --sort rate --number 50 --save /etc/pacman.d/mirrorlist.new'
 
 # Run atuin
 eval "$(atuin init zsh)"
