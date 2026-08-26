@@ -38,8 +38,8 @@ hl.curve("nocturneMotion", {
 hl.curve("nocturneWorkspace", {
 	type = "bezier",
 	points = {
-		{ 0.45, 0.0 },
-		{ 0.15, 1.0 },
+		{ 0.16, 1.0 },
+		{ 0.36, 1.0 },
 	},
 })
 
@@ -98,25 +98,25 @@ hl.animation({
 hl.animation({
 	leaf = "workspaces",
 	enabled = true,
-	speed = 4,
+	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slidefade 25%",
+	style = "slide 70%",
 })
 
 hl.animation({
 	leaf = "workspacesIn",
 	enabled = true,
-	speed = 4,
+	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slidefade 25%",
+	style = "slide 70%",
 })
 
 hl.animation({
 	leaf = "workspacesOut",
 	enabled = true,
-	speed = 4,
+	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slidefade 25%",
+	style = "slide 70%",
 })
 
 -- ─[ Focus ]─────────────────────────────────────────────────────────

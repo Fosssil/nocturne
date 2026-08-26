@@ -30,7 +30,7 @@ hl.config({
 		rounding = 8,
 		rounding_power = 4.0,
 
-		active_opacity = 0.94,
+		active_opacity = 1,
 		inactive_opacity = 0.90,
 		fullscreen_opacity = 1.0,
 
@@ -40,7 +40,7 @@ hl.config({
 
 		border_part_of_window = true,
 		blur = {
-			enabled = true,
+			enabled = false,
 
 			size = 8,
 			passes = 1,
