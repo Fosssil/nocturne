@@ -38,8 +38,8 @@ hl.curve("nocturneMotion", {
 hl.curve("nocturneWorkspace", {
 	type = "bezier",
 	points = {
-		{ 0.16, 1.0 },
-		{ 0.36, 1.0 },
+		{ 0.20, 0.85 },
+		{ 0.35, 1.0 },
 	},
 })
 
@@ -100,7 +100,7 @@ hl.animation({
 	enabled = true,
 	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slide 70%",
+	style = "slide 90%",
 })
 
 hl.animation({
@@ -108,7 +108,7 @@ hl.animation({
 	enabled = true,
 	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slide 70%",
+	style = "slide 90%",
 })
 
 hl.animation({
@@ -116,7 +116,7 @@ hl.animation({
 	enabled = true,
 	speed = 7,
 	bezier = "nocturneWorkspace",
-	style = "slide 70%",
+	style = "slidefade 90%",
 })
 
 hl.animation({
@@ -164,7 +164,7 @@ hl.animation({
 hl.animation({
 	leaf = "layersOut",
 	enabled = true,
-	speed = 4,
+	speed = 5,
 	bezier = "nocturneSmooth",
 	style = "fade",
 })
