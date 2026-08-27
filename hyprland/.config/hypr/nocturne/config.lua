@@ -3,4 +3,33 @@ hl.config({
 	render = {
 		expand_undersized_textures = false,
 	},
+
+	input = {
+		numlock_by_default = true,
+		repeat_rate = 35,
+		repeat_delay = 300,
+
+		sensitivity = -0.10,
+		-- accel_profile = "flat",
+
+		follow_mouse = 1,
+		follow_mouse_shrink = 2,
+		follow_mouse_threshold = 0.0,
+
+		focus_on_close = 2,
+		mouse_refocus = true,
+		float_switch_override_focus = 1,
+
+		touchpad = {
+			disable_while_typing = true,
+
+			natural_scroll = true,
+			scroll_factor = 1.0,
+
+			clickfinger_behavior = true,
+
+			tap_to_click = true,
+			tap_and_drag = true,
+		},
+	},
 })
