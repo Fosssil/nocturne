@@ -48,7 +48,7 @@ hl.curve("nocturneWorkspace", {
 hl.config({
 	animations = {
 		enabled = true,
-		workspace_wraparound = true,
+		workspace_wraparound = false,
 	},
 })
 
@@ -119,6 +119,14 @@ hl.animation({
 	style = "slide 70%",
 })
 
+hl.animation({
+	leaf = "specialWorkspace",
+	enabled = true,
+	speed = 6,
+	bezier = "nocturneSmooth",
+	style = "slidefade 20%",
+})
+
 -- ─[ Focus ]─────────────────────────────────────────────────────────
 
 hl.animation({
@@ -129,9 +137,34 @@ hl.animation({
 })
 
 hl.animation({
-	leaf = "specialWorkspace",
+	leaf = "fadeDpms",
 	enabled = true,
-	speed = 6,
+	speed = 10,
 	bezier = "nocturneSmooth",
-	style = "slidefade 20%",
+})
+
+-- ─[ layers ]─────────────────────────────────────────────────────────────────────────────
+
+hl.animation({
+	leaf = "layers",
+	enabled = true,
+	speed = 5,
+	bezier = "nocturneSmooth",
+	style = "fade",
+})
+
+hl.animation({
+	leaf = "layersIn",
+	enabled = true,
+	speed = 5,
+	bezier = "nocturneSmooth",
+	style = "fade",
+})
+
+hl.animation({
+	leaf = "layersOut",
+	enabled = true,
+	speed = 4,
+	bezier = "nocturneSmooth",
+	style = "fade",
 })
