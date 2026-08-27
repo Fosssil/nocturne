@@ -9,8 +9,15 @@ hl.config({
 		gaps_workspaces = 0,
 
 		col = {
-			active_border = colors.mauve,
-			inactive_border = colors.surface1,
+			active_border = {
+				colors = {
+					"#" .. colors.mauveAlpha .. "ee",
+					"#" .. colors.lavenderAlpha .. "aa",
+				},
+				angle = 45,
+			},
+
+			inactive_border = "#" .. colors.overlay1Alpha .. "aa",
 			nogroup_border = colors.peach,
 			nogroup_border_active = colors.red,
 		},
@@ -31,7 +38,7 @@ hl.config({
 		rounding_power = 4.0,
 
 		active_opacity = 1,
-		inactive_opacity = 0.90,
+		inactive_opacity = 0.95,
 		fullscreen_opacity = 1.0,
 
 		dim_modal = true,
