@@ -46,4 +46,12 @@ hl.config({
 		initial_workspace_tracking = 2,
 		initial_workspace_token_timeout = 10,
 	},
+
+	binds = {
+		workspace_back_and_forth = true,
+	},
+
+	xwayland = {
+		use_nearest_neighbor = false,
+	}
 })
