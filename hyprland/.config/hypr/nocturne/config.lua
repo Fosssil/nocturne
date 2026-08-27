@@ -32,4 +32,18 @@ hl.config({
 			tap_and_drag = true,
 		},
 	},
+
+	misc = {
+		font_family = "SN Pro",
+		splash_font_family = "Maple Mono NF",
+		disable_hyprland_logo = true,
+		vrr = 2,
+
+		-- Experimental
+		animate_manual_resizes = true,
+		animate_mouse_windowdragging = true,
+		focus_on_activate = true,
+		initial_workspace_tracking = 2,
+		initial_workspace_token_timeout = 10,
+	},
 })
