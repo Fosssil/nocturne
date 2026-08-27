@@ -72,9 +72,9 @@ hl.config({
 			input_methods_ignorealpha = 0.2,
 		},
 		shadow = {
-			enabled = true,
+			enabled = false,
 
-			range = 8,
+			range = 10,
 			render_power = 3,
 			sharp = false,
 
