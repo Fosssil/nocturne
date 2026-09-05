@@ -10,9 +10,9 @@ hl.gesture({
 	action = "fullscreen",
 })
 
-hl.gesture({
-	fingers = 2,
-	direction = "pinch",
-	action = "cursor_zoom",
-	zoom_level = 2,
-})
+-- hl.gesture({
+-- 	fingers = 2,
+-- 	direction = "pinch",
+-- 	action = "cursor_zoom",
+-- 	zoom_level = 2,
+-- })
