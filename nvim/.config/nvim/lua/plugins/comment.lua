@@ -4,7 +4,7 @@ return {
 	lazy = false,
 	opts = {
 		keep_cursor = true,
-		keep_selection = "accurate",
+		keep_selection = "never",
 		insert_space = true,
 		ignore_empty_lines = "always",
 		fallback_to_block = "if_line_cms_wrapped",
