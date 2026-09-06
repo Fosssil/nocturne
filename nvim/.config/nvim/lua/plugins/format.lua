@@ -98,6 +98,8 @@ return {
 				cpp = { "clang-format" },
 
 				java = { "google-java-format" },
+
+				qml = { "qmlformat" }
 			},
 		},
 
