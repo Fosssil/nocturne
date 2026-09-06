@@ -61,6 +61,7 @@ return {
 				jsonls = require("lsp.jsonls"),
 				lua_ls = require("lsp.lua_ls"),
 				marksman = require("lsp.marksman"),
+				qmlls = require("lsp.qmlls"),
 				taplo = require("lsp.taplo"),
 				terraformls = require("lsp.terraformls"),
 				yamlls = require("lsp.yamlls"),

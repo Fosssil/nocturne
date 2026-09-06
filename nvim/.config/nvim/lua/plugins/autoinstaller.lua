@@ -19,6 +19,7 @@ return {
 			"yamlls",
 			"taplo",
 			"marksman",
+			"qmlls",
 			-- Web
 			"html",
 			"cssls",
