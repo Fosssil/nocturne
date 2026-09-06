@@ -22,6 +22,10 @@ return {
 	{
 		"stevearc/conform.nvim",
 
+		-- dependencies = {
+		-- 	"Leon-Degel-Koehn/qmlformat.nvim",
+		-- },
+
 		event = "BufReadPre",
 
 		cmd = {
@@ -99,7 +103,8 @@ return {
 
 				java = { "google-java-format" },
 
-				qml = { "qmlformat" }
+				qml = { "qmlformat" },
+				qmljs = { "qmlformat" },
 			},
 		},
 
