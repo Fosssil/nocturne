@@ -1,17 +1,21 @@
-import Quickshell
 import QtQuick
+import Quickshell
 
 PanelWindow {
+    implicitHeight: 32
+    exclusiveZone: implicitHeight
+    color: "#1e1e2e"
+
     anchors {
         top: true
         left: true
         right: true
     }
 
-    implicitHeight: 30
-
     Text {
         anchors.centerIn: parent
-        text: "hello world"
+        text: "Nocturne"
+        color: "#cdd6f4"
     }
+
 }
