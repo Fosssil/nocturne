@@ -178,7 +178,7 @@ return {
 					-- score_offset = -2,
 
 					opts = {
-						prefix_min_len = 4,
+						prefix_min_len = 2,
 
 						backend = {
 							use = "gitgrep-or-ripgrep",
