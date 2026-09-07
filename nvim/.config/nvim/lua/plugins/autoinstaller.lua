@@ -19,7 +19,6 @@ return {
 			"yamlls",
 			"taplo",
 			"marksman",
-			"qmlls",
 			-- Web
 			"html",
 			"cssls",
@@ -34,9 +33,8 @@ return {
 			"basedpyright",
 			"rust_analyzer",
 			"gopls",
-			-- Linux
-			"hyprls",
 
+			-- "qmlls",
 			------------------------------------------------------------------
 			-- Formatters
 			------------------------------------------------------------------

@@ -1,13 +1,9 @@
 ---@type vim.lsp.Config
-local config = {}
-
-config.cmd = {
-	"qmlls", "-E"
+return {
+	"qmlls",
+	cmd = { "/usr/bin/qmlls6" },
+	filetypes = { "qml", "qmljs" },
+	single_file_support = true,
+	workspace_required = false,
+	root_markers = { ".git", "shell.qml", "qml.ini", ".qmlls.ini" },
 }
-
-config.filetypes = {
-	"qml",
-	"qmljs",
-}
-
-return config

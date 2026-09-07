@@ -37,17 +37,13 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-
 		event = {
 			"BufReadPost",
 			"BufNewFile",
 		},
-
 		dependencies = {
 			"mason-org/mason-lspconfig.nvim",
-			-- "hrsh7th/cmp-nvim-lsp",
 		},
-
 		config = function()
 			local lsp = require("lsp")
 
@@ -75,6 +71,11 @@ return {
 				})
 
 				vim.lsp.config(name, merged)
+
+				-- 2. Crucial: Explicitly enable system servers (like qmlls) that mason ignores
+				if name == "qmlls" then
+					vim.lsp.enable(name)
+				end
 			end
 		end,
 	},
