@@ -27,7 +27,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Plugins
 plugins=(
 	git
-	eza
+	# eza
 	fzf
 	kitty
 	python
@@ -89,10 +89,16 @@ alias p10kup='git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 alias cat='bat --theme "mocha" --italic-text always --style "header-filename,header-filesize,grid" ' # run cat -> bat with arguments
 
 # Changing "ls" to "eza"
-alias l.='eza -a --color=always | grep -E "^\."'
-alias la='eza -a --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
-alias ls='eza -l --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
-alias ll='eza -al --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
+# alias l.='eza -a --color=always | grep -E "^\."'
+# alias la='eza -a --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
+# alias ls='eza -l --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
+# alias ll='eza -al --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
+#
+alias l='lsd'
+alias la='lsd -a'
+alias ls='lsd -l'
+alias ll='lsd -la'
+alias lt='lsd --tree'
 
 alias reflector='sudo reflector --protocol https --latest 100 --sort rate --number 50 --save /etc/pacman.d/mirrorlist.new'
 
