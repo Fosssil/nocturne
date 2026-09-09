@@ -11,31 +11,53 @@
 export SUDO_EDITOR="nvim"
 export ZSH="$HOME/.oh-my-zsh"
 export LC_ALL="en_IN.UTF-8"
-export PYTHONPATH="/usr/bin/python3"
+
+export FZF_BASE="/usr/bin/fzf"
+export DISABLE_FZF_AUTO_COMPLETION="false"
+export DISABLE_FZF_KEY_BINDINGS="false"
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
---color=border:#6C7086,label:#CDD6F4" # set catppuccin color for fzf
+--color=border:#6C7086,label:#CDD6F4"
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
 
-ENABLE_CORRECTION="true"
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
-zstyle ':omz:update' frequency 7
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Plugins
 plugins=(
-	git
-	# eza
-	fzf
-	kitty
-	python
-	colorize
-	starship
 	colored-man-pages
-	zsh-interactive-cd
+	colorize
+	copypath
 	fast-syntax-highlighting
+	fzf
+	fzf-tab
+	gitfast
+	git
+	magic-enter
+	starship
+	zsh-interactive-cd
+	qrcode
+	sudo
+	zoxide
+	zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -99,10 +121,13 @@ alias la='lsd -a'
 alias ls='lsd -l'
 alias ll='lsd -la'
 alias lt='lsd --tree'
+alias cd='z'
 
 alias reflector='sudo reflector --protocol https --latest 100 --sort rate --number 50 --save /etc/pacman.d/mirrorlist.new'
 
 # Run atuin
 eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
 #[ PRISM of RUINS ] — From ruins, light.
 # End of File
+#
