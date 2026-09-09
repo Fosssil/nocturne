@@ -10,6 +10,7 @@ classic: false
 # Possible values: permission, user, group, context, size, date, name, inode, links, git
 blocks:
   - permission
+  - user
   - size
   - git
   - name
@@ -24,7 +25,7 @@ color:
   # When "classic" is set, this is set to "no-color".
   # Possible values: default, custom
   # When "custom" is set, lsd will look in the config directory for `colors.yaml`.
-  theme: default
+  theme: custom
 # == Date ==
 # This specifies the date format for the date column. The freeform format
 # accepts a strftime like string.
@@ -40,7 +41,6 @@ dereference: false
 # What items to display. Do not specify this for the default behavior.
 # Possible values: all, almost-all, directory-only
 # display: all
-
 # == Icons ==
 icons:
   # When to use icons.
@@ -74,7 +74,7 @@ recursion:
   enabled: false
   # How deep the recursion should go. This has to be a positive integer. Leave
   # it unspecified for (virtually) infinite.
-  # depth: 3
+  # depth: 2
 # == Size ==
 # Specifies the format of the size column.
 # Possible values: default, short, bytes
@@ -82,8 +82,7 @@ size: default
 # == Permission ==
 # Specify the format of the permission column
 # Possible value: rwx, octal, attributes (windows only), disable
-# permission: rwx
-
+permission: rwx
 # == Sorting ==
 sorting:
   # Specify what to sort by.
@@ -95,7 +94,7 @@ sorting:
   # Whether to group directories together and where.
   # When "classic" is set, this is set to "none".
   # Possible values: first, last, none
-  dir-grouping: none
+  dir-grouping: first
 # == No Symlink ==
 # Whether to omit showing symlink targets
 # Possible values: false, true
