@@ -22,6 +22,7 @@ success_symbol = "[➜](bold mauve)"
 # success_symbol = "[~>](bold mauve)"
 error_symbol = "[](red)"
 
+
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 style = "blue"
@@ -41,7 +42,7 @@ symbol = " "
 ignore_branches = ["main", "master"]
 
 [git_status]
-format = '([$up_to_date$staged$deleted$ahead_behind$untracked$modified$diverged]($style) )'
+format = '([$up_to_date$staged$ahead_behind$untracked$modified$diverged]($style) )'
 style = "lavender"
 up_to_date = "[✓](bold green)"
 staged = "[+${count}](green)"
@@ -51,8 +52,6 @@ behind = "[⇣${count}](green)"
 untracked = "[?${count}](yellow)"
 modified = "[!${count}](peach)"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-
-# ~/.config/starship.toml
 
 [sudo]
 format = "[$symbol]($style)"
