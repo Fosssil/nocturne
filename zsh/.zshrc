@@ -127,7 +127,12 @@ alias reflector='sudo reflector --protocol https --latest 100 --sort rate --numb
 
 # Run atuin
 eval "$(atuin init zsh)"
-eval "$(zoxide init zsh)"
+
+# Run zoxide
+if [[ -f ~/.zsh/zoxide.zsh ]]; then
+	source ~/.zsh/zoxide.zsh
+fi
+
 #[ PRISM of RUINS ] — From ruins, light.
 # End of File
 #
