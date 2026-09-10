@@ -7,7 +7,6 @@ add_newline = true
 continuation_prompt = "[∙](text) "
 
 format = """
-$username\
 $directory\
 $git_branch\
 $git_metrics\
