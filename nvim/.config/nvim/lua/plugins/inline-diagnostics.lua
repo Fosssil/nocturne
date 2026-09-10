@@ -35,14 +35,21 @@ return {
 		options = {
 
 			show_source = {
-				enabled = false,
+				enabled = true,
 			},
 
 			use_icons_from_diagnostic = true,
 			set_arrow_to_diag_color = false,
 			show_code = false,
 
-			throttle = 10,
+			throttle = 15,
+
+			severity = {
+				vim.diagnostic.severity.ERROR,
+				vim.diagnostic.severity.WARN,
+				vim.diagnostic.severity.INFO,
+				vim.diagnostic.severity.HINT,
+			},
 			------------------------------------------------------------------
 			-- Messages
 			------------------------------------------------------------------
@@ -50,8 +57,8 @@ return {
 			add_messages = {
 				messages = true,
 				display_count = true,
-				use_max_severity = false,
-				show_multiple_glyphs = false,
+				use_max_severity = true,
+				show_multiple_glyphs = true,
 			},
 
 			------------------------------------------------------------------
@@ -87,7 +94,7 @@ return {
 
 			overflow = {
 				mode = "wrap",
-				padding = 1,
+				padding = 0,
 			},
 
 			break_line = {
