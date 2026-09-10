@@ -50,7 +50,7 @@ format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 disabled = true
 
 [git_status]
-format = '([$up_to_date$staged$deleted$ahead_behind$untracked$modified$diverged]($style) )'
+format = '([$up_to_date$staged$deleted$ahead_behind$untracked$modified$diverged]($style) )'
 style = "lavender"
 up_to_date = "[✓](bold green)"
 staged = "[+${count}](green)"
