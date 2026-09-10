@@ -44,14 +44,14 @@ ignore_branches = ["main", "master"]
 [git_status]
 format = '([$up_to_date$staged$ahead_behind$untracked$modified$diverged]($style) )'
 style = "lavender"
-up_to_date = "[✓](bold green)"
+up_to_date = "[✓](green)"
 staged = "[+${count}](green)"
-deleted = "[✘${count}](maroon)"
+# deleted = "[✘${count}](maroon)"
 ahead = "[⇡${count}](sapphire)"
-behind = "[⇣${count}](green)"
+behind = "[⇣${count}](sapphire)"
 untracked = "[?${count}](yellow)"
-modified = "[!${count}](peach)"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+modified = "[!${count}](yellow)"
+diverged = "[⇕⇡${ahead_count}⇣${behind_count}](peach)"
 
 [sudo]
 format = "[$symbol]($style)"
