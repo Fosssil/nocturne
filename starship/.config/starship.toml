@@ -5,8 +5,24 @@ palette = "catppuccin_mocha"
 
 add_newline = true
 
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+format = """
+$username\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$battery\
+$character\
+"""
+
+
+right_format = ""
+
+[character]
+success_symbol = '[➜](mauve)'
+error_symbol = "[](red)"
+
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
