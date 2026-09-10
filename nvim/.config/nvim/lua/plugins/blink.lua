@@ -92,10 +92,10 @@ return {
 
 			default = {
 				"lsp",
-				"buffer",
-				"snippets",
 				"path",
 				"ripgrep",
+				"snippets",
+				"buffer",
 			},
 
 			per_filetype = {
@@ -143,7 +143,8 @@ return {
 
 				lsp = {
 					name = "LSP",
-					fallbacks = { "buffer" },
+					-- default was buffer
+					fallbacks = { "ripgrep" },
 					-- score_offset = 100,
 				},
 
@@ -159,6 +160,9 @@ return {
 
 				snippets = {
 					name = "Snip",
+					opts = {
+						friendly_snippets = true,
+					},
 					-- score_offset = -10,
 				},
 
@@ -180,6 +184,8 @@ return {
 					opts = {
 						prefix_min_len = 2,
 
+						project_root_marker = ".git",
+
 						backend = {
 							use = "gitgrep-or-ripgrep",
 						},
@@ -187,6 +193,9 @@ return {
 						ripgrep = {
 							max_filesize = "1M",
 							search_casing = "--smart-case",
+							ripgrep = {
+								additional_paths = { "/usr/share/dict/american-english" },
+							},
 						},
 
 						debug = false,
@@ -324,8 +333,8 @@ return {
 		fuzzy = {
 			implementation = "prefer_rust_with_warning",
 			sorts = {
-				"exact",
 				"score",
+				"exact",
 				"sort_text",
 				"label",
 			},
