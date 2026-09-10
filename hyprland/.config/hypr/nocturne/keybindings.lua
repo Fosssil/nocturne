@@ -69,7 +69,12 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"), { description = "Lock Sc
 -- ─[ Window Management ]────────────────────────────────────────────
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close active window" })
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen(), { description = "Toggle fullscreen" })
+hl.bind(
+	mainMod .. " + F",
+	hl.dsp.window.fullscreen({ mode = "maximized" }),
+	{ description = "Toggle maximized window" }
+)
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen(), {description = "Toogle fullscreen window"})
 hl.bind(mainMod .. " + V", hl.dsp.window.float(), { description = "Toggle floating" })
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo(), { description = "Toggle pseudotiling" })
 
