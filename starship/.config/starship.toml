@@ -19,8 +19,9 @@ right_format = ""
 
 [character]
 success_symbol = "[➜](bold mauve)"
+error_symbol = "[×](red)"
 # success_symbol = "[~>](bold mauve)"
-error_symbol = "[](red)"
+# error_symbol = "[](red)"
 
 
 [directory]
