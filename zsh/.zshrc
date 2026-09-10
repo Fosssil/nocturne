@@ -57,7 +57,7 @@ plugins=(
 	qrcode
 	sudo
 	zoxide
-	zsh-autosuggestions
+	# zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -110,12 +110,6 @@ alias cmatrix='cxxmatrix -m FOSSIL --frame-rate=30 --rain-density=2.0'          
 alias p10kup='git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull'               # to update powerlevel10k
 alias cat='bat --theme "mocha" --italic-text always --style "header-filename,header-filesize,grid" ' # run cat -> bat with arguments
 
-# Changing "ls" to "eza"
-# alias l.='eza -a --color=always | grep -E "^\."'
-# alias la='eza -a --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
-# alias ls='eza -l --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
-# alias ll='eza -al --icons --group-directories-first --git --time-style=relative --no-filesize --color=always --color-scale all '
-#
 alias l='lsd'
 alias la='lsd -a'
 alias ls='lsd -l'
@@ -128,11 +122,10 @@ alias reflector='sudo reflector --protocol https --latest 100 --sort rate --numb
 # Run atuin
 eval "$(atuin init zsh)"
 
-# Run zoxide
 if [[ -f ~/.zsh/zoxide.zsh ]]; then
 	source ~/.zsh/zoxide.zsh
 fi
 
-#[ PRISM of RUINS ] — From ruins, light.
-# End of File
-#
+if [[ -f ~/.zsh/starship.zsh ]]; then
+	source ~/.zsh/starship.zsh
+fi
