@@ -2,6 +2,7 @@ local catppuccin = require("plugins.catppuccin")
 -- Faster startup
 vim.loader.enable()
 vim.o.synmaxcol = 240
+vim.o.termguicolors = true
 
 -- Set leader key
 vim.g.mapleader = " "
@@ -20,5 +21,3 @@ require("lazy").setup("plugins")
 require("core.options")
 require("core.disable")
 require("core.diagnostics")
-
-vim.o.termguicolors = true
