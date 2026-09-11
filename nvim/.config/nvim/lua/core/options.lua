@@ -59,6 +59,13 @@ opt.splitright = true -- Vertical splits to the right
 opt.updatetime = 250 -- Faster completion
 opt.timeoutlen = 300 -- Faster mapped sequences
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    opt.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
+
+
 -- Optional:
 -- opt.lazyredraw = true -- Optimization for macros or fast edits
 -- opt.colorcolumn = "80" -- enable for projects with strict line-length limits.
