@@ -102,7 +102,6 @@ return {
 					},
 
 					file_browser = {
-						entry_maker = require("real-icons.integrations.telescope_file_browser").entry_maker, -- for real-icons
 						hijack_netrw = true,
 						hidden = true,
 						respect_gitignore = true,
