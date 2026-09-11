@@ -40,6 +40,7 @@ return {
 			------------------------------------------------------------------
 			"stylua",
 			"shfmt",
+			"prettier",
 			"prettierd",
 			"yamlfmt",
 			"taplo",
@@ -52,6 +53,10 @@ return {
 			"markdownlint-cli2",
 			"dockerfmt",
 			"terraform_fmt",
+			"xmlformatter",
+			"alejandra",
+			"google-java-format",
+			"qmlformat",
 
 			------------------------------------------------------------------
 			-- Linters
