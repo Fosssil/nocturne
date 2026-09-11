@@ -4,8 +4,9 @@ return {
 	lazy = false,
 	opts = {
 		keep_cursor = true,
-		keep_selection = "never",
+		keep_selection = "adjust",
 		insert_space = true,
+		detect_indent = true,
 		ignore_empty_lines = "always",
 		fallback_to_block = "if_line_cms_wrapped",
 
