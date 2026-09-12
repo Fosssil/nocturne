@@ -5,32 +5,39 @@ return {
 	-- build = "cargo build --release",
 
 	dependencies = {
-		"yaocccc/blink-cmp-cmdlinehistory",
-		"mikavilpas/blink-ripgrep.nvim",
-		"xieyonn/blink-cmp-dat-word",
+		"nvim-mini/mini.icons",
+		"onsails/lspkind.nvim",
 		"xzbdmw/colorful-menu.nvim",
+		"xieyonn/blink-cmp-dat-word",
+		"mikavilpas/blink-ripgrep.nvim",
+		"yaocccc/blink-cmp-cmdlinehistory",
 	},
 
-	init = function()
-		config = function(_, opts)
-			require("colorful-menu").setup({
-				ls = {
-					lua_ls = { arguments_hl = "@comment" },
-					basedpyright = { extra_info_hl = "@comment" },
-					gopls = {
-						align_type_to_right = true,
-						preserve_type_when_truncate = true,
-					},
-					fallback = true,
-					fallback_extra_info_hl = "@comment",
+	-- ++ Config for colorful-menu +------------------+
+	config = function(_, opts)
+		require("colorful-menu").setup({
+			ls = {
+				lua_ls = { arguments_hl = "@comment" },
+				basedpyright = { extra_info_hl = "@comment" },
+				gopls = {
+					align_type_to_right = true,
+					preserve_type_when_truncate = true,
 				},
+				fallback = true,
+				fallback_extra_info_hl = "@comment",
+			},
 
-				fallback_highlight = "@variable",
-				max_width = 60,
-			})
-			require("blink.cmp").setup(opts)
-		end
+			fallback_highlight = "@variable",
+			max_width = 60,
+		})
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", {
+			bold = true,
+		})
+		require("blink.cmp").setup(opts)
+	end,
 
+	-- ++ function to set enter behavior in cmdline +-+
+	init = function()
 		vim.api.nvim_create_autocmd("CmdlineEnter", {
 			callback = function()
 				local t = vim.fn.getcmdtype()
@@ -96,6 +103,7 @@ return {
 			documentation = {
 				auto_show = false,
 				auto_show_delay_ms = 100,
+				window = { border = "bold" },
 			},
 
 			-- Ghost Text
@@ -114,65 +122,87 @@ return {
 				scrolloff = 2,
 				scrollbar = true,
 				direction_priority = { "s", "n" },
-				-- Change border type in options.lua
-
+				border = "bold", -- We can hange border type (for floating windows) in options.lua
 				draw = {
+					gap = 1,
+					padding = { 1, 2 },
+					align_to = "cursor",
+					treesitter = { "lsp" },
+					columns = {
+						{ "label", gap = 3 },
+						{ "kind_icon" },
+						{ "kind" },
+						-- { "source_name" },
+						{ "source_id" },
+					},
 					components = {
-						label = {
-							width = {
-								fill = true,
-								max = 60,
-							},
-
-							text = function(ctx)
-								return require("colorful-menu").blink_components_text(ctx)
-							end,
-
-							highlight = function(ctx)
-								return require("colorful-menu").blink_components_highlight(ctx)
-							end,
-						},
-
 						kind = {
 							width = {
 								min = 9,
 								max = 12,
 							},
 						},
-
+						label = {
+							width = {
+								fill = true,
+								max = 60,
+							},
+							-- Text
+							text = function(ctx)
+								local highlights_info = require("colorful-menu").blink_highlights(ctx)
+								if highlights_info ~= nil then
+									-- Or you want to add more item to label
+									return highlights_info.label
+								else
+									return ctx.label
+								end
+							end,
+							-- highlight
+							highlight = function(ctx)
+								local highlights = {}
+								local highlights_info = require("colorful-menu").blink_highlights(ctx)
+								if highlights_info ~= nil then
+									highlights = highlights_info.highlights
+								end
+								for _, idx in ipairs(ctx.label_matched_indices) do
+									table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+								end
+								-- Do something else
+								return highlights
+							end,
+						},
 						kind_icon = {
 							ellipsis = false,
-
+							-- text
 							text = function(ctx)
-								return " " .. ctx.kind_icon .. "  "
+								if ctx.source_name ~= "Path" then
+									return require("lspkind").symbol_map[ctx.kind] or "" .. ctx.icon_gap
+								end
+								local is_unknown_type = vim.tbl_contains(
+									{ "link", "socket", "fifo", "char", "block", "unknown" },
+									ctx.item.data.type
+								)
+								local mini_icon, _ = require("mini.icons").get(
+									is_unknown_type and "os" or ctx.item.data.type,
+									is_unknown_type and "" or ctx.label
+								)
+								return (mini_icon or ctx.kind_icon) .. ctx.icon_gap
 							end,
-
+							-- highlight
 							highlight = function(ctx)
-								return {
-									{
-										group = ctx.kind_hl,
-										priority = 20000,
-									},
-								}
+								if ctx.source_name ~= "Path" then
+									return ctx.kind_hl
+								end
+								local is_unknown_type = vim.tbl_contains(
+									{ "link", "socket", "fifo", "char", "block", "unknown" },
+									ctx.item.data.type
+								)
+								local mini_icon, mini_hl = require("mini.icons").get(
+									is_unknown_type and "os" or ctx.item.data.type,
+									is_unknown_type and "" or ctx.label
+								)
+								return mini_icon ~= nil and mini_hl or ctx.kind_hl
 							end,
-						},
-					},
-
-					align_to = "label",
-					padding = { 2, 2 },
-					gap = 3,
-
-					columns = {
-						{ "kind_icon" },
-						{
-							"label",
-							gap = 2,
-						},
-						{
-							"kind",
-						},
-						{
-							"source_name",
 						},
 					},
 				},
