@@ -16,6 +16,9 @@ opt.formatoptions:remove({ "c", "r", "o" }) -- Don't auto comment new lines
 opt.errorbells = false -- Disable error bell
 opt.visualbell = false -- Disable visual bell
 opt.splitkeep = "screen"
+opt.winborder = "bold"
+
+
 
 -- Behaviour
 opt.smoothscroll = true
@@ -60,11 +63,10 @@ opt.updatetime = 250 -- Faster completion
 opt.timeoutlen = 300 -- Faster mapped sequences
 
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    opt.formatoptions:remove({ "c", "r", "o" })
-  end,
+	callback = function()
+		opt.formatoptions:remove({ "c", "r", "o" })
+	end,
 })
-
 
 -- Optional:
 -- opt.lazyredraw = true -- Optimization for macros or fast edits

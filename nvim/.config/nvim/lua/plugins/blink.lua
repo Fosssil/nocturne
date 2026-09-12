@@ -109,11 +109,12 @@ return {
 
 			-- Menu
 			menu = {
-				direction_priority = { "s", "n" },
 				min_width = 45,
 				max_height = 20,
 				scrolloff = 2,
 				scrollbar = true,
+				direction_priority = { "s", "n" },
+				-- Change border type in options.lua
 
 				draw = {
 					components = {
