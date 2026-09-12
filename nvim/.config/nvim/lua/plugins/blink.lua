@@ -1,9 +1,7 @@
 -- ~/.config/nvim/lua/plugins/blink.lua
 return {
 	"saghen/blink.cmp",
-
 	version = "1.*",
-
 	-- build = "cargo build --release",
 
 	dependencies = {
@@ -13,23 +11,17 @@ return {
 		"xieyonn/blink-cmp-dat-word",
 		"xzbdmw/colorful-menu.nvim",
 	},
+
 	init = function()
 		config = function(_, opts)
 			require("colorful-menu").setup({
 				ls = {
-					lua_ls = {
-						arguments_hl = "@comment",
-					},
-
+					lua_ls = { arguments_hl = "@comment" },
+					basedpyright = { extra_info_hl = "@comment" },
 					gopls = {
 						align_type_to_right = true,
 						preserve_type_when_truncate = true,
 					},
-
-					basedpyright = {
-						extra_info_hl = "@comment",
-					},
-
 					fallback = true,
 					fallback_extra_info_hl = "@comment",
 				},
@@ -37,14 +29,12 @@ return {
 				fallback_highlight = "@variable",
 				max_width = 60,
 			})
-
 			require("blink.cmp").setup(opts)
 		end
 
 		vim.api.nvim_create_autocmd("CmdlineEnter", {
 			callback = function()
 				local t = vim.fn.getcmdtype()
-
 				if t == ":" or t == "/" or t == "?" then
 					vim.schedule(function()
 						if vim.fn.mode() == "c" then
@@ -55,9 +45,13 @@ return {
 			end,
 		})
 	end,
+
+	-- ++ Blink Options +-----------------------------+
+	--- @module 'blink.cmp'
+	--- @type blink.cmp.Config
 	opts = {
+		-- Keymaps
 		keymap = {
-			-- We'll design this ourselves
 			preset = "none",
 
 			["<Down>"] = {
@@ -66,6 +60,16 @@ return {
 			},
 
 			["<Up>"] = {
+				"select_prev",
+				"fallback",
+			},
+
+			["<Tab>"] = {
+				"select_next",
+				"fallback",
+			},
+
+			["<S-Tab>"] = {
 				"select_prev",
 				"fallback",
 			},
