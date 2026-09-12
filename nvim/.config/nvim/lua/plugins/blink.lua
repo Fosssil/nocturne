@@ -5,7 +5,6 @@ return {
 	-- build = "cargo build --release",
 
 	dependencies = {
-		"rafamadriz/friendly-snippets",
 		"yaocccc/blink-cmp-cmdlinehistory",
 		"mikavilpas/blink-ripgrep.nvim",
 		"xieyonn/blink-cmp-dat-word",
@@ -91,20 +90,21 @@ return {
 			nerd_font_variant = "mono",
 		},
 
-		snippets = {
-			preset = "default",
-			opts = {
-				use_label_description = true,
-			},
-		},
-
 		sources = {
+
+			--Disabling snippets
+			transform_items = function(_, items)
+				local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+
+				return vim.tbl_filter(function(item)
+					return item.kind ~= CompletionItemKind.Snippet
+				end, items)
+			end,
 
 			default = {
 				"lsp",
 				"path",
 				"ripgrep",
-				"snippets",
 				"buffer",
 			},
 
@@ -166,14 +166,6 @@ return {
 				buffer = {
 					name = "Buf",
 					-- score_offset = 5,
-				},
-
-				snippets = {
-					name = "Snip",
-					opts = {
-						friendly_snippets = true,
-					},
-					-- score_offset = -10,
 				},
 
 				clhistory = {

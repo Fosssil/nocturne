@@ -63,13 +63,27 @@ return {
 				yamlls = require("lsp.yamlls"),
 			}
 
+			-- Tell Blink not to advertise snippet support to LSP servers.
+			local capabilities = require("blink.cmp").get_lsp_capabilities({
+				textDocument = {
+					completion = {
+						completionItem = {
+							snippetSupport = false,
+						},
+					},
+				},
+			})
+
+			-- Apply the shared LSP capabilities to each server configuration.
 			for name, config in pairs(servers) do
 				assert(type(config) == "table", ("%s did not return a config table"):format(name))
 
+				-- Preserve server-specific capabilities while adding Blink's.
 				local merged = vim.tbl_deep_extend("force", config, {
-					capabilities = vim.tbl_deep_extend("force", config.capabilities or {}, lsp.capabilities),
+					capabilities = vim.tbl_deep_extend("force", config.capabilities or {}, capabilities),
 				})
 
+				-- Register the final configuration with Neovim.
 				vim.lsp.config(name, merged)
 
 				-- 2. Crucial: Explicitly enable system servers (like qmlls) that mason ignores
