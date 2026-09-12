@@ -90,6 +90,94 @@ return {
 			nerd_font_variant = "mono",
 		},
 
+		-- ++ Completion Menu +---------------------------+
+		completion = {
+			-- Documentation menu
+			documentation = {
+				auto_show = false,
+				auto_show_delay_ms = 100,
+			},
+
+			-- Ghost Text
+			ghost_text = {
+				enabled = true,
+				show_with_menu = true,
+				show_with_selection = true,
+				show_without_menu = false,
+				show_without_selection = false,
+			},
+
+			-- Menu
+			menu = {
+				direction_priority = { "s", "n" },
+				min_width = 45,
+				max_height = 20,
+				scrolloff = 2,
+				scrollbar = true,
+
+				draw = {
+					components = {
+						label = {
+							width = {
+								fill = true,
+								max = 60,
+							},
+
+							text = function(ctx)
+								return require("colorful-menu").blink_components_text(ctx)
+							end,
+
+							highlight = function(ctx)
+								return require("colorful-menu").blink_components_highlight(ctx)
+							end,
+						},
+
+						kind = {
+							width = {
+								min = 9,
+								max = 12,
+							},
+						},
+
+						kind_icon = {
+							ellipsis = false,
+
+							text = function(ctx)
+								return " " .. ctx.kind_icon .. "  "
+							end,
+
+							highlight = function(ctx)
+								return {
+									{
+										group = ctx.kind_hl,
+										priority = 20000,
+									},
+								}
+							end,
+						},
+					},
+
+					align_to = "label",
+					padding = { 2, 2 },
+					gap = 3,
+
+					columns = {
+						{ "kind_icon" },
+						{
+							"label",
+							gap = 2,
+						},
+						{
+							"kind",
+						},
+						{
+							"source_name",
+						},
+					},
+				},
+			},
+		},
+
 		sources = {
 
 			--Disabling snippets
@@ -217,116 +305,6 @@ return {
 						},
 
 						spellsuggest = true,
-					},
-				},
-			},
-		},
-
-		completion = {
-			documentation = {
-				auto_show = false,
-				auto_show_delay_ms = 100,
-			},
-
-			ghost_text = {
-				enabled = true,
-
-				show_with_selection = true,
-				show_without_selection = false,
-
-				show_with_menu = true,
-				show_without_menu = false,
-			},
-
-			menu = {
-
-				direction_priority = function()
-					local blink = require("blink.cmp")
-
-					local ctx = blink.get_context()
-					local item = blink.get_selected_item()
-
-					if not ctx or not item then
-						return { "s", "n" }
-					end
-
-					local text = item.textEdit and item.textEdit.newText or item.insertText or item.label
-
-					if text:find("\n") then
-						vim.g.blink_cmp_upwards_ctx_id = ctx.id
-						return { "n", "s" }
-					end
-
-					if vim.g.blink_cmp_upwards_ctx_id == ctx.id then
-						return { "n", "s" }
-					end
-
-					return { "s", "n" }
-				end,
-
-				min_width = 45,
-				max_height = 20,
-				scrolloff = 2,
-				scrollbar = true,
-
-				draw = {
-					components = {
-						label = {
-							width = {
-								fill = true,
-								max = 60,
-							},
-
-							text = function(ctx)
-								return require("colorful-menu").blink_components_text(ctx)
-							end,
-
-							highlight = function(ctx)
-								return require("colorful-menu").blink_components_highlight(ctx)
-							end,
-						},
-
-						kind = {
-							width = {
-								min = 9,
-								max = 12,
-							},
-						},
-
-						kind_icon = {
-							ellipsis = false,
-
-							text = function(ctx)
-								return " " .. ctx.kind_icon .. "  "
-							end,
-
-							highlight = function(ctx)
-								return {
-									{
-										group = ctx.kind_hl,
-										priority = 20000,
-									},
-								}
-							end,
-						},
-					},
-
-					align_to = "label",
-					padding = { 2, 2 },
-					gap = 3,
-
-					columns = {
-						{ "kind_icon" },
-						{
-							"label",
-							gap = 2,
-						},
-						{
-							"kind",
-						},
-						{
-							"source_name",
-						},
 					},
 				},
 			},
