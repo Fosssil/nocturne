@@ -50,7 +50,8 @@ return {
 	--- @module 'blink.cmp'
 	--- @type blink.cmp.Config
 	opts = {
-		-- Keymaps
+
+		-- ++ Keymaps +-----------------------------------+
 		keymap = {
 			preset = "none",
 
@@ -83,6 +84,11 @@ return {
 				"cancel",
 				"fallback",
 			},
+		},
+
+		-- ++ appearance +--------------------------------+
+		appearance = {
+			nerd_font_variant = "mono",
 		},
 
 		snippets = {
