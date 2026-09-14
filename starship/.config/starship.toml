@@ -3,7 +3,7 @@
 
 palette = "catppuccin_mocha"
 
-add_newline = true
+add_newline = false
 continuation_prompt = "[∙](text) "
 
 format = """
