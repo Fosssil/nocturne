@@ -1,4 +1,6 @@
 -- ~/.config/nvim/lua/plugins/blink.lua
+--- @module "lazy"
+--- @type LazySpec
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
@@ -9,7 +11,7 @@ return {
 		"onsails/lspkind.nvim",
 		"xzbdmw/colorful-menu.nvim",
 		"xieyonn/blink-cmp-dat-word",
-		"mikavilpas/blink-ripgrep.nvim",
+		{ "mikavilpas/blink-ripgrep.nvim", version = "*" },
 		"yaocccc/blink-cmp-cmdlinehistory",
 	},
 
@@ -60,36 +62,12 @@ return {
 		-- ++ Keymaps +-----------------------------------+
 		keymap = {
 			preset = "none",
-
-			["<Down>"] = {
-				"select_next",
-				"fallback",
-			},
-
-			["<Up>"] = {
-				"select_prev",
-				"fallback",
-			},
-
-			["<Tab>"] = {
-				"select_next",
-				"fallback",
-			},
-
-			["<S-Tab>"] = {
-				"select_prev",
-				"fallback",
-			},
-
-			["<CR>"] = {
-				"accept",
-				"fallback",
-			},
-
-			["<Esc>"] = {
-				"cancel",
-				"fallback",
-			},
+			["<Down>"] = { "select_next", "fallback" },
+			["<Up>"] = { "select_prev", "fallback" },
+			["<Tab>"] = { "select_next", "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
+			["<CR>"] = { "accept", "fallback" },
+			["<Esc>"] = { "cancel", "fallback" },
 		},
 
 		-- ++ appearance +--------------------------------+
@@ -115,6 +93,20 @@ return {
 				show_without_selection = false,
 			},
 
+			-- Fuzzy
+			fuzzy = {
+				implementation = "prefer_rust_with_warning",
+				-- sorts = {
+				-- 	"score",
+				-- 	"exact",
+				-- 	"sort_text",
+				-- 	"label",
+				-- },
+			},
+
+			keyword = {
+				range = "full",
+			},
 			-- Menu
 			menu = {
 				min_width = 45,
@@ -137,10 +129,28 @@ return {
 					},
 					components = {
 						kind = {
-							width = {
-								min = 9,
-								max = 12,
-							},
+							width = { min = 9, max = 12 },
+						},
+						label_description = {
+							width = { max = 30 },
+							highlight = "BlinkCmpLabelDescription",
+							text = function(ctx)
+								return ctx.label_description
+							end,
+						},
+						source_name = {
+							width = { max = 30 },
+							highlight = "BlinkCmpSource",
+							text = function(ctx)
+								return ctx.source_name
+							end,
+						},
+						source_id = {
+							width = { max = 30 },
+							highlight = "BlinkCmpSource",
+							text = function(ctx)
+								return ctx.source_id
+							end,
 						},
 						label = {
 							width = {
@@ -210,49 +220,29 @@ return {
 		},
 
 		sources = {
-
-			--Disabling snippets
+			-- ++ Disabling snippets +------------------------+
 			transform_items = function(_, items)
 				local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-
 				return vim.tbl_filter(function(item)
 					return item.kind ~= CompletionItemKind.Snippet
 				end, items)
 			end,
 
-			default = {
-				"lsp",
-				"path",
-				"ripgrep",
-				"buffer",
-			},
-
+			-- ++ Default sources +---------------------------+
+			default = { "lsp", "buffer", "ripgrep", "path", "datword" },
 			per_filetype = {
-				lua = {
-					inherit_defaults = true,
-					"lazydev",
-				},
-				markdown = {
-					inherit_defaults = true,
-					"datword",
-				},
-
-				text = {
-					inherit_defaults = true,
-					"datword",
-				},
-
-				gitcommit = {
-					inherit_defaults = true,
-					"datword",
-				},
-
-				rst = {
-					inherit_defaults = true,
-					"datword",
-				},
+				lua = { inherit_defaults = true, "lazydev" },
+				markdown = { inherit_defaults = true, "datword" },
+				text = { "datword", inherit_defaults = true },
+				gitcommit = { inherit_defaults = true, "datword" },
+				rst = { inherit_defaults = true, "datword" },
+				vim = { inherit_defaults = true, "ripgrep", "cmdline" },
 			},
 			providers = {
+				buffer = { name = "Buf", score_offset = -3 },
+				lsp = { name = "LSP", fallbacks = { "ripgrep", "buffer" } },
+				path = { name = "Path", fallbacks = { "ripgrep", "buffer" } },
+				lazydev = { name = "Lua", module = "lazydev.integrations.blink" },
 				cmdline = {
 					min_keyword_length = function(ctx)
 						if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
@@ -262,137 +252,79 @@ return {
 						return 0
 					end,
 				},
-
-				lazydev = {
-					name = "Lua",
-					module = "lazydev.integrations.blink",
-
-					-- score_offset = 200,
+				ripgrep = {
+					name = "RipGrep",
+					module = "blink-ripgrep",
+					--- @module "blink-ripgrep"
+					--- @type blink-ripgrep.Options
+					opts = {
+						prefix_min_len = 2,
+						project_root_marker = ".git",
+						backend = { use = "gitgrep-or-ripgrep" },
+						ripgrep = {
+							max_filesize = "5M",
+							project_root_fallback = true,
+							search_casing = "--ignore-case", -- can be "--case-sensitive" or "--smart-case"
+						},
+					},
 				},
-
-				lsp = {
-					name = "LSP",
-					-- default was buffer
-					fallbacks = { "ripgrep" },
-					-- score_offset = 100,
+				datword = {
+					name = "Dict",
+					score_offset = -3,
+					module = "blink-cmp-dat-word",
+					min_keyword_length = 3,
+					opts = {
+						paths = {
+							spellsuggest = true,
+							"/usr/share/dict/american-english",
+						},
+					},
 				},
-
-				path = {
-					name = "Path",
-					-- score_offset = 20,
-				},
-
-				buffer = {
-					name = "Buf",
-					-- score_offset = 5,
-				},
-
 				clhistory = {
 					name = "Hist",
 					module = "cmdlinehistory",
-					-- score_offset = 75,
-
 					opts = {
 						fixedkeyword = true,
 					},
 				},
-
-				ripgrep = {
-					name = "Proj",
-					module = "blink-ripgrep",
-					-- score_offset = -2,
-
-					opts = {
-						prefix_min_len = 2,
-
-						project_root_marker = ".git",
-
-						backend = {
-							use = "gitgrep-or-ripgrep",
-						},
-
-						ripgrep = {
-							max_filesize = "1M",
-							search_casing = "--smart-case",
-							ripgrep = {
-								additional_paths = { "/usr/share/dict/american-english" },
-							},
-						},
-
-						debug = false,
-					},
-				},
-
-				datword = {
-					name = "Dict",
-					module = "blink-cmp-dat-word",
-
-					-- score_offset = -15,
-					min_keyword_length = 3,
-
-					opts = {
-						paths = {
-							"/usr/share/dict/american-english",
-						},
-
-						spellsuggest = true,
-					},
-				},
 			},
 		},
 
-		fuzzy = {
-			implementation = "prefer_rust_with_warning",
-			sorts = {
-				"score",
-				"exact",
-				"sort_text",
-				"label",
-			},
-		},
-
+		-- ++ Command Line +------------------------------+
 		cmdline = {
-			keymap = {
-				preset = "inherit",
-
-				--[[ ["<CR>"] = {
-					"accept_and_enter",
-					"fallback",
-				}, ]]
-			},
-
-			sources = function()
-				local t = vim.fn.getcmdtype()
-
-				if t == ":" then
-					return {
-						"clhistory",
-						"cmdline",
-						"buffer",
-					}
-				end
-
-				if t == "/" or t == "?" then
-					return {
-						"clhistory",
-						"buffer",
-					}
-				end
-
-				return {}
-			end,
-
+			keymap = { preset = "inherit" },
 			completion = {
+				ghost_text = { enabled = true },
+				list = { auto_insert = false },
 				menu = {
 					auto_show = function()
 						return vim.fn.getcmdtype() == ":"
 					end,
 				},
-
-				ghost_text = {
-					enabled = true,
-				},
 			},
+			sources = function()
+				local t = vim.fn.getcmdtype()
+				if t == ":" then
+					return {
+						"cmdline",
+						"clhistory",
+						"buffer",
+					}
+				end
+				if t == "/" or t == "?" then
+					return {
+						"buffer",
+						"clhistory",
+					}
+				end
+				return {}
+			end,
+		},
+
+		-- ++ Terminal +----------------------------------+
+		term = {
+			enabled = true,
+			keymap = { preset = "inherit" },
 		},
 	},
 }
