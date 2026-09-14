@@ -71,14 +71,10 @@ return {
 		},
 
 		-- ++ appearance +--------------------------------+
-		appearance = {
-			nerd_font_variant = "mono",
-		},
+		appearance = { nerd_font_variant = "mono" },
 
 		-- Fuzzy
-		fuzzy = {
-			implementation = "prefer_rust_with_warning",
-		},
+		fuzzy = { implementation = "prefer_rust_with_warning" },
 
 		-- ++ Completion Menu +---------------------------+
 		completion = {
@@ -98,9 +94,7 @@ return {
 				show_without_selection = false,
 			},
 
-			keyword = {
-				range = "full",
-			},
+			keyword = { range = "full" },
 
 			-- Menu
 			menu = {
@@ -234,7 +228,7 @@ return {
 				vim = { inherit_defaults = true, "ripgrep", "cmdline" },
 			},
 			providers = {
-				buffer = { name = "Buf", score_offset = -3 },
+				buffer = { name = "Buf" },
 				lsp = { name = "LSP", fallbacks = { "ripgrep", "buffer" } },
 				path = { name = "Path", fallbacks = { "ripgrep", "buffer" } },
 				lazydev = { name = "Lua", module = "lazydev.integrations.blink" },
@@ -265,7 +259,6 @@ return {
 				},
 				datword = {
 					name = "Dict",
-					score_offset = -3,
 					module = "blink-cmp-dat-word",
 					min_keyword_length = 3,
 					opts = {
