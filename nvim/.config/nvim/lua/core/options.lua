@@ -18,8 +18,6 @@ opt.visualbell = false -- Disable visual bell
 opt.splitkeep = "screen"
 opt.winborder = "bold"
 
-
-
 -- Behaviour
 opt.smoothscroll = true
 opt.inccommand = "split" -- Previews substitutions

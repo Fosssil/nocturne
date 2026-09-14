@@ -75,6 +75,11 @@ return {
 			nerd_font_variant = "mono",
 		},
 
+		-- Fuzzy
+		fuzzy = {
+			implementation = "prefer_rust_with_warning",
+		},
+
 		-- ++ Completion Menu +---------------------------+
 		completion = {
 			-- Documentation menu
@@ -93,20 +98,10 @@ return {
 				show_without_selection = false,
 			},
 
-			-- Fuzzy
-			fuzzy = {
-				implementation = "prefer_rust_with_warning",
-				-- sorts = {
-				-- 	"score",
-				-- 	"exact",
-				-- 	"sort_text",
-				-- 	"label",
-				-- },
-			},
-
 			keyword = {
 				range = "full",
 			},
+
 			-- Menu
 			menu = {
 				min_width = 45,
@@ -186,7 +181,7 @@ return {
 							-- text
 							text = function(ctx)
 								if ctx.source_name ~= "Path" then
-									return require("lspkind").symbol_map[ctx.kind] or "" .. ctx.icon_gap
+									return (require("lspkind").symbol_map[ctx.kind] or "") .. ctx.icon_gap
 								end
 								local is_unknown_type = vim.tbl_contains(
 									{ "link", "socket", "fifo", "char", "block", "unknown" },
@@ -274,8 +269,8 @@ return {
 					module = "blink-cmp-dat-word",
 					min_keyword_length = 3,
 					opts = {
+						spellsuggest = true,
 						paths = {
-							spellsuggest = true,
 							"/usr/share/dict/american-english",
 						},
 					},
@@ -296,7 +291,6 @@ return {
 			keymap = { preset = "inherit" },
 			completion = {
 				ghost_text = { enabled = true },
-				list = { auto_insert = false },
 				menu = {
 					auto_show = function()
 						return vim.fn.getcmdtype() == ":"
