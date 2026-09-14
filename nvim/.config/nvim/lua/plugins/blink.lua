@@ -282,6 +282,7 @@ return {
 				},
 				clhistory = {
 					name = "Hist",
+					score_offset = -1,
 					module = "cmdlinehistory",
 					opts = {
 						fixedkeyword = true,
@@ -307,8 +308,8 @@ return {
 				if t == ":" then
 					return {
 						"cmdline",
-						"clhistory",
 						"buffer",
+						"clhistory",
 					}
 				end
 				if t == "/" or t == "?" then
