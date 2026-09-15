@@ -13,16 +13,9 @@ return {
 
 		config = function()
 			local ts = require("nvim-treesitter")
-
-			------------------------------------------------------------------
-			-- Tree-sitter
-			------------------------------------------------------------------
-
-			ts.setup({})
-
-			------------------------------------------------------------------
-			-- Tree-sitter Textobjects
-			------------------------------------------------------------------
+			ts.setup({
+				highlight = { enable = true, additional_vim_regex_highlighting = false },
+			})
 
 			require("nvim-treesitter-textobjects").setup({
 				select = {
@@ -46,10 +39,7 @@ return {
 			------------------------------------------------------------------
 
 			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup(
-					"TreesitterAutoStart",
-					{ clear = true }
-				),
+				group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true }),
 
 				callback = function(args)
 					pcall(vim.treesitter.start, args.buf)

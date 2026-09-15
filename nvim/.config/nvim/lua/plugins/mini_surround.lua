@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins/mini_surround.lua
 return {
 	"nvim-mini/mini.surround",
 	version = "*",
@@ -5,7 +6,6 @@ return {
 	opts = {},
 	config = function(_, opts)
 		require("mini.surround").setup(opts)
-
 		require("which-key").add({
 			{ "s", group = "Surround" },
 			{ "sa", desc = "Add Surrounding" },

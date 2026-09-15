@@ -1,52 +1,18 @@
 -- ~/.config/nvim/lua/plugins/lsp.lua
 return {
+	-- ++ Mason +-------------------------------------+
+	{ "mason-org/mason.nvim", opts = { ui = { border = "single" } } },
 
-	---------------------------------------------------------------------
-	-- Mason
-	---------------------------------------------------------------------
+	-- ++ Mason LSP Config +--------------------------+
+	{ "mason-org/mason-lspconfig.nvim", dependencies = { "mason-org/mason.nvim" }, opts = { automatic_enable = true } },
 
-	{
-		"mason-org/mason.nvim",
-
-		opts = {
-			ui = {
-				border = "rounded",
-			},
-		},
-	},
-
-	---------------------------------------------------------------------
-	-- Mason LSPConfig
-	---------------------------------------------------------------------
-
-	{
-		"mason-org/mason-lspconfig.nvim",
-
-		dependencies = {
-			"mason-org/mason.nvim",
-		},
-
-		opts = {
-			automatic_enable = true,
-		},
-	},
-
-	---------------------------------------------------------------------
-	-- LSP
-	---------------------------------------------------------------------
-
+	-- ++ LSP Config +--------------------------------+
 	{
 		"neovim/nvim-lspconfig",
-		event = {
-			"BufReadPost",
-			"BufNewFile",
-		},
-		dependencies = {
-			"mason-org/mason-lspconfig.nvim",
-		},
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = { "mason-org/mason-lspconfig.nvim" },
 		config = function()
 			local lsp = require("lsp")
-
 			local servers = {
 				ansiblels = require("lsp.ansiblels"),
 				bashls = require("lsp.bashls"),
@@ -65,13 +31,7 @@ return {
 
 			-- Tell Blink not to advertise snippet support to LSP servers.
 			local capabilities = require("blink.cmp").get_lsp_capabilities({
-				textDocument = {
-					completion = {
-						completionItem = {
-							snippetSupport = false,
-						},
-					},
-				},
+				textDocument = { completion = { completionItem = { snippetSupport = false } } },
 			})
 
 			-- Apply the shared LSP capabilities to each server configuration.
@@ -79,9 +39,11 @@ return {
 				assert(type(config) == "table", ("%s did not return a config table"):format(name))
 
 				-- Preserve server-specific capabilities while adding Blink's.
-				local merged = vim.tbl_deep_extend("force", config, {
-					capabilities = vim.tbl_deep_extend("force", config.capabilities or {}, capabilities),
-				})
+				local merged = vim.tbl_deep_extend(
+					"force",
+					config,
+					{ capabilities = vim.tbl_deep_extend("force", config.capabilities or {}, capabilities) }
+				)
 
 				-- Register the final configuration with Neovim.
 				vim.lsp.config(name, merged)

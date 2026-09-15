@@ -1,9 +1,7 @@
 -- ~/.config/nvim/lua/plugins/mason_autoinstaller.lua
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
-	dependencies = {
-		"mason-org/mason.nvim",
-	},
+	dependencies = { "mason-org/mason.nvim" },
 
 	opts = {
 		ensure_installed = {
@@ -28,6 +26,7 @@ return {
 			"terraformls",
 
 			-- ++ Formatters +--------------------------------+
+			"codespell",
 			"alejandra",
 			"clang-format",
 			"dockerfmt",
@@ -69,8 +68,6 @@ return {
 		debounce_hours = 24,
 		auto_update = false,
 
-		integrations = {
-			["mason-lspconfig"] = true,
-		},
+		integrations = { ["mason-lspconfig"] = true },
 	},
 }

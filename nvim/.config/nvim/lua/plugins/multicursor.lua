@@ -1,5 +1,4 @@
 -- ~/.config/nvim/lua/plugins/multicursor.lua
-
 return {
 	"jake-stewart/multicursor.nvim",
 	branch = "1.0",
@@ -7,55 +6,31 @@ return {
 	config = function()
 		local mc = require("multicursor-nvim")
 		mc.setup()
-
 		local map = vim.keymap.set
 
-		--------------------------------------------------
 		-- Cursor Creation
-		--------------------------------------------------
-
 		map({ "n", "x" }, "<leader>mn", function()
 			mc.matchAddCursor(1)
-		end, {
-			desc = "Next Match",
-		})
-
+		end, { desc = "Next Match" })
 		map({ "n", "x" }, "<leader>ms", function()
 			mc.matchSkipCursor(1)
-		end, {
-			desc = "Skip Match",
-		})
-
+		end, { desc = "Skip Match" })
 		map({ "n", "x" }, "<leader>mN", function()
 			mc.matchAllAddCursors()
-		end, {
-			desc = "All Matches",
-		})
-
+		end, { desc = "All Matches" })
 		map({ "n", "x" }, "<leader>m<Up>", function()
 			mc.lineAddCursor(-1)
-		end, {
-			desc = "Add Cursor Above",
-		})
-
+		end, { desc = "Add Cursor Above" })
 		map({ "n", "x" }, "<leader>m<Down>", function()
 			mc.lineAddCursor(1)
-		end, {
-			desc = "Add Cursor Below",
-		})
+		end, { desc = "Add Cursor Below" })
 
-		--------------------------------------------------
-		-- Mouse
-		--------------------------------------------------
-
+		-- ++ Mouse +-------------------------------------+
 		map("n", "<C-LeftMouse>", mc.handleMouse)
 		map("n", "<C-LeftDrag>", mc.handleMouseDrag)
 		map("n", "<C-LeftRelease>", mc.handleMouseRelease)
 
-		--------------------------------------------------
-		-- Multicursor Layer
-		--------------------------------------------------
-
+		-- ++ Multicursor Layer +-------------------------+
 		mc.addKeymapLayer(function(layer)
 			-- Move between cursors
 			layer({ "n", "x" }, "<Left>", mc.prevCursor)
@@ -71,12 +46,8 @@ return {
 			end)
 		end)
 
-		--------------------------------------------------
-		-- Highlights
-		--------------------------------------------------
-
+		-- ++ Highlights +--------------------------------+
 		local hl = vim.api.nvim_set_hl
-
 		hl(0, "MultiCursorCursor", { link = "Cursor" })
 		hl(0, "MultiCursorVisual", { link = "Visual" })
 		hl(0, "MultiCursorSign", { link = "SignColumn" })

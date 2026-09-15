@@ -1,8 +1,6 @@
 -- ~/.config/nvim/lua/plugins/in-and-out.lua
-
 return {
 	"ysmb-wtsg/in-and-out.nvim",
-
 	keys = {
 		{
 			"<C-CR>",

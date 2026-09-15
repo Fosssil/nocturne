@@ -1,23 +1,12 @@
 -- ~/.config/nvim/lua/plugins/inline-diagnostics.lua
 return {
 	"rachartier/tiny-inline-diagnostic.nvim",
-
 	event = "LspAttach",
-
 	priority = 1000,
-
 	opts = {
-		----------------------------------------------------------------------
-		-- Appearance
-		----------------------------------------------------------------------
 		preset = "powerline",
-
 		transparent_bg = false,
 		transparent_cursorline = true,
-
-		----------------------------------------------------------------------
-		-- Highlight Groups
-		----------------------------------------------------------------------
 		hi = {
 			error = "DiagnosticError", -- Highlight for error diagnostics
 			warn = "DiagnosticWarn", -- Highlight for warning diagnostics
@@ -28,98 +17,40 @@ return {
 			background = "CursorLine", -- Background highlight for diagnostics
 			mixing_color = "Normal", -- Color to blend background with (or "None")
 		},
-
-		----------------------------------------------------------------------
-		-- Behaviour
-		----------------------------------------------------------------------
 		options = {
-
-			show_source = {
-				enabled = true,
-			},
-
+			show_source = { enabled = true },
 			use_icons_from_diagnostic = true,
 			set_arrow_to_diag_color = false,
 			show_code = false,
-
 			throttle = 15,
-
 			severity = {
 				vim.diagnostic.severity.ERROR,
 				vim.diagnostic.severity.WARN,
 				vim.diagnostic.severity.INFO,
 				vim.diagnostic.severity.HINT,
 			},
-			------------------------------------------------------------------
-			-- Messages
-			------------------------------------------------------------------
-
 			add_messages = {
 				messages = true,
 				display_count = true,
 				use_max_severity = true,
 				show_multiple_glyphs = true,
 			},
-
-			------------------------------------------------------------------
-			-- Multiple lines
-			------------------------------------------------------------------
-
-			multilines = {
-				enabled = true,
-				always_show = true,
-				trim_whitespaces = true,
-			},
-
-			------------------------------------------------------------------
-			-- Related diagnostics
-			------------------------------------------------------------------
-
-			show_related = {
-				enabled = false,
-			},
-
-			------------------------------------------------------------------
-			-- Cursor behaviour
-			------------------------------------------------------------------
+			multilines = { enabled = true, always_show = true, trim_whitespaces = true },
+			show_related = { enabled = false },
 			show_diags_only_under_cursor = false,
-
 			enable_on_insert = false,
-
 			enable_on_select = false,
-
-			------------------------------------------------------------------
-			-- Wrapping
-			------------------------------------------------------------------
-
-			overflow = {
-				mode = "wrap",
-				padding = 0,
-			},
-
-			break_line = {
-				enabled = false,
-			},
-
-			------------------------------------------------------------------
-			-- Formatting
-			------------------------------------------------------------------
-
+			overflow = { mode = "wrap", padding = 0 },
+			break_line = { enabled = false },
 			format = function(diag)
 				local msg = diag.message
-
 				msg = msg:gsub("%.$", "")
-
 				msg = msg:gsub("^Unused local ", "Unused local: ")
 				msg = msg:gsub("^Unused function ", "Unused function: ")
 				msg = msg:gsub("^Undefined global ", "Unknown variable: ")
 				msg = msg:gsub("^Link to non%-existent link definition with label ", "Missing link: ")
-
 				return msg
 			end,
-
-			------------------------------------------------------------------
-
 			override_open_float = true,
 		},
 	},
