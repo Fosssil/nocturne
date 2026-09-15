@@ -1,7 +1,6 @@
 -- ~/.config/nvim/lua/plugins/dial.lua
 return {
 	"monaqa/dial.nvim",
-
 	keys = {
 		{
 			"<C-a>",
@@ -71,7 +70,6 @@ return {
 
 	config = function()
 		local augend = require("dial.augend")
-
 		require("dial.config").augends:register_group({
 			default = {
 				-- Numbers
@@ -97,93 +95,21 @@ return {
 				-- Colors
 				augend.hexcolor.new(),
 
-				------------------------------------------------------------------
 				-- Custom Toggles
-				------------------------------------------------------------------
-
-				augend.constant.new({
-					elements = { "on", "off" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "yes", "no" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "enable", "disable" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "enabled", "disabled" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "start", "stop" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "open", "close" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "up", "down" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "left", "right" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "min", "max" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "dev", "prod" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "get", "set" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "public", "private" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "horizontal", "vertical" },
-					word = true,
-					cyclic = true,
-				}),
-
-				augend.constant.new({
-					elements = { "width", "height" },
-					word = true,
-					cyclic = true,
-				}),
+				augend.constant.new({ elements = { "on", "off" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "yes", "no" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "enable", "disable" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "enabled", "disabled" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "start", "stop" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "open", "close" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "up", "down" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "left", "right" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "min", "max" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "dev", "prod" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "get", "set" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "public", "private" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "horizontal", "vertical" }, word = true, cyclic = true }),
+				augend.constant.new({ elements = { "width", "height" }, word = true, cyclic = true }),
 			},
 		})
 	end,
