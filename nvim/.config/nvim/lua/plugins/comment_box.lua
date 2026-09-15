@@ -1,15 +1,8 @@
--- ~/.config/nvim/lua/plugins/comment-box.lua
+-- ~/.config/nvim/lua/plugins/comment_box.lua
 
 return {
 	"LudoPinelli/comment-box.nvim",
-
-	cmd = {
-		"CBline",
-		"CBllline",
-		"CBllbox",
-		"CBcatalog",
-		"CBd",
-	},
+	cmd = { "CBline", "CBllline", "CBllbox", "CBcatalog", "CBd" },
 
 	opts = {
 		comment_style = "line",
@@ -26,25 +19,8 @@ return {
 	},
 
 	keys = {
-		{
-			"<leader>cl",
-			"<cmd>CBline15<CR>",
-			mode = "n",
-			desc = "Comment Line",
-		},
-
-		{
-			"<leader>ct",
-			"<cmd>CBllline17<CR>",
-			mode = { "n", "x", "v" },
-			desc = "Comment line Title",
-		},
-
-		{
-			"<leader>cb",
-			"<cmd>CBllbox2<CR>",
-			mode = { "n", "x" },
-			desc = "Comment Box",
-		},
+		{ "<leader>cl", "<cmd>CBline15<CR>", mode = "n", desc = "Comment Line" },
+		{ "<leader>ct", "<cmd>CBllline17<CR>", mode = { "n", "x", "v" }, desc = "Comment line Title" },
+		{ "<leader>cb", "<cmd>CBllbox2<CR>", mode = { "n", "x" }, desc = "Comment Box" },
 	},
 }
