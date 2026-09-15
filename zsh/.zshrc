@@ -7,7 +7,7 @@
 # | $$      | $$  | $$ /$$$$$$|  $$$$$$/| $$ \/  | $$
 # |__/      |__/  |__/|______/ \______/ |__/     |__/
 
-# Enviroment Variables
+# Environment Variables
 export SUDO_EDITOR="nvim"
 export ZSH="$HOME/.oh-my-zsh"
 export LC_ALL="en_IN.UTF-8"
@@ -62,6 +62,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+alias cd='z'
+
 # Pacman aliases
 alias up='yay -Syu'                                                         # update system
 alias search='yay -Ss'                                                      # Search for packages
@@ -75,7 +77,7 @@ alias fgrep='fgrep --color=auto' # add colors to fgrep
 
 # cp, mv & rm aliases
 alias mv='mv -iv'                                                # Add and verbose
-alias rm='rm -if'                                                # Add promt and forcefully flag
+alias rm='rm -if'                                                # Add prompt and forcefully flag
 alias cp="rsync -avh --inplace --no-whole-file --info=progress2" # Change cp with rsync
 
 # system power aliases
@@ -108,18 +110,23 @@ alias date='date "+%d-%b-%Y %I:%M %p"'
 alias aws-test='aws sts get-caller-identity'                                           # test account connection with AWS
 alias cmatrix='cxxmatrix -m FOSSIL --frame-rate=30 --rain-density=2.0'                 # advance cmatrix
 alias p10kup='git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull' # to update powerlevel10k
-alias cat='bat'
 
 alias l='lsd'
 alias la='lsd -a'
 alias ls='lsd -l'
 alias ll='lsd -la'
 alias lt='lsd --tree'
-alias cd='z'
-
 alias reflector='sudo reflector --protocol https --latest 100 --sort rate --number 50 --save /etc/pacman.d/mirrorlist.new'
 
-# Run atuin
+# ++ -- Bat +--------------------------------------+
+alias cat='bat'
+batdiff() {
+	git diff --name-only --relative --diff-filter=d -z | xargs -0 bat --diff
+}
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
+# ++ Run atuin +-----------------------------------+
 eval "$(atuin init zsh)"
 
 if [[ -f ~/.zsh/zoxide.zsh ]]; then
