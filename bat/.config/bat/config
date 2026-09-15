@@ -1,1 +1,6 @@
 --theme="Catppuccin Mocha"
+--color="always"
+--style="plain"
+--map-syntax='*.conf:INI'
+--map-syntax='.ignore:Git Ignore'
+--map-syntax='/etc/apache2/**/*.conf:Apache Conf'
