@@ -105,10 +105,10 @@ alias gitfetch='onefetch'
 alias neofetch='fastfetch'
 alias speedtest="speedtest++"
 alias date='date "+%d-%b-%Y %I:%M %p"'
-alias aws-test='aws sts get-caller-identity'                                                         # test account connection with AWS
-alias cmatrix='cxxmatrix -m FOSSIL --frame-rate=30 --rain-density=2.0'                               # advance cmatrix
-alias p10kup='git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull'               # to update powerlevel10k
-alias cat='bat --theme "mocha" --italic-text always --style "header-filename,header-filesize,grid" ' # run cat -> bat with arguments
+alias aws-test='aws sts get-caller-identity'                                           # test account connection with AWS
+alias cmatrix='cxxmatrix -m FOSSIL --frame-rate=30 --rain-density=2.0'                 # advance cmatrix
+alias p10kup='git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull' # to update powerlevel10k
+alias cat='bat'
 
 alias l='lsd'
 alias la='lsd -a'
