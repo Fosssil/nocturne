@@ -18,11 +18,8 @@ local exclude_ft = {
 return {
 	{
 		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 
-		event = {
-			"BufReadPre",
-			"BufNewFile",
-		},
 		opts = {
 			chunk = {
 				enable = true,
@@ -41,42 +38,27 @@ return {
 					left_bottom = "╰",
 					right_arrow = "─",
 				},
-				style = {
-					{ fg = "#9584CC" }, -- Nocturne structural purple
-					{ fg = colors.red },
-				},
+				style = { { fg = "#9584CC" }, { fg = colors.red } },
 				exclude_filetypes = exclude_ft,
 			},
-
 			indent = {
 				enable = true,
 				priority = 10,
 				use_treesitter = false,
 				ahead_lines = 8,
 				delay = 0,
-				chars = {
-					"┊",
-				},
-				style = {
-					{ fg = colors.surface1 },
-				},
+				chars = { "┊" },
+				style = { { fg = colors.surface1 } },
 				exclude_filetypes = exclude_ft,
 			},
-
 			line_num = {
 				enable = true,
 				priority = 8,
 				use_treesitter = true,
-				style = {
-					fg = colors.subtext1,
-					bold = true,
-				},
+				style = { fg = colors.subtext1, bold = true },
 				exclude_filetypes = exclude_ft,
 			},
-
-			blank = {
-				enable = false,
-			},
+			blank = { enable = false },
 		},
 	},
 }
