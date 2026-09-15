@@ -12,12 +12,12 @@ vim.schedule(function()
 	collectgarbage("setpause", 100)
 	collectgarbage("setstepmul", 200)
 end)
--- Bootstrap lazy.nvim and load plugins
-require("core.keymaps")
-require("core.lazy")
-require("lazy").setup("plugins")
 
 -- Load core settings
 require("core.options")
 require("core.disable")
 require("core.diagnostics")
+
+-- Bootstrap lazy.nvim and load plugins
+require("core.keymaps")
+require("core.lazy")
