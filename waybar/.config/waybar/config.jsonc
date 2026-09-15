@@ -12,6 +12,7 @@
     "pulseaudio#microphone",
     "network",
     // "group/hardware",
+	"bluetooth",
     "backlight",
     "pulseaudio#speaker",
     "battery",
