@@ -1,17 +1,11 @@
 -- ~/.config/nvim/lua/plugins/fun.lua
 return {
+	-- ++ CellularAutomaton +-------------------------+
+	{ "eandrju/cellular-automaton.nvim", cmd = { "CellularAutomaton" } },
 
-	{
-		"eandrju/cellular-automaton.nvim",
-
-		cmd = {
-			"CellularAutomaton",
-		},
-	},
-
+	-- ++ Power Mode +--------------------------------+
 	{
 		"axsaucedo/neovim-power-mode",
-
 		cmd = {
 			"PowerModeToggle",
 			"PowerModeEnable",
@@ -22,52 +16,27 @@ return {
 			"PowerModeInterrupt",
 			"PowerModeStatus",
 		},
-
 		opts = {
 			auto_enable = false,
-
-			particles = {
-				preset = "stars",
-			},
-
-			backspace = {
-				enabled = true,
-				preset = "fire",
-			},
-
-			combo = {
-				enabled = true,
-			},
-
-			shake = {
-				mode = "scroll",
-			},
-
-			fire_wall = {
-				enabled = true,
-			},
+			particles = { preset = "stars" },
+			backspace = { enabled = true, preset = "fire" },
+			combo = { enabled = true },
+			shake = { mode = "scroll" },
+			fire_wall = { enabled = true },
 		},
 	},
 
+	-- Keyboard sounds
 	{
 		"jerrywang1981/keystroke.nvim",
-
-		cmd = {
-			"KeyStrokeEnable",
-			"KeyStrokeDisable",
-			"KeyStrokeToggle",
-			"KeyStroke",
-		},
-
+		cmd = { "KeyStrokeEnable", "KeyStrokeDisable", "KeyStrokeToggle", "KeyStroke" },
 		config = function()
 			require("keystroke").setup({
 				auto_start = false,
-
 				handlers = {
 					["i"] = {
 						sound = {
 							callback = require("keystroke.sound").play_sound,
-
 							options = {
 								style = "typewriter",
 								style = "bubble",
@@ -77,7 +46,6 @@ return {
 							},
 						},
 					},
-
 					["*"] = {},
 				},
 			})
