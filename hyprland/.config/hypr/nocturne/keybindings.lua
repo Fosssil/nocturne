@@ -9,7 +9,6 @@ local secondMod = "ALT"
 -- ─[ Applications ]──────────────────────────────────────────────────
 
 hl.bind(secondMod .. " + T", hl.dsp.exec_cmd("kitty"), { description = "Open terminal" })
-
 hl.bind(
 	secondMod .. " + B",
 	hl.dsp.exec_cmd("/usr/bin/zen-browser"),
@@ -17,7 +16,6 @@ hl.bind(
 )
 
 hl.bind(secondMod .. " + E", hl.dsp.exec_cmd("dolphin"), { description = "Open file manager" })
-
 hl.bind(
 	secondMod .. " + R",
 	hl.dsp.exec_cmd("rofi -show drun -i -theme ~/.config/rofi/launcher/theme.rasi"),
@@ -39,6 +37,7 @@ hl.bind(
 	),
 	{ description = "Open calculator" }
 )
+
 -- Clipboard
 hl.bind(
 	secondMod .. " + V",
@@ -47,6 +46,7 @@ hl.bind(
 	),
 	{ description = "Open Clipboard" }
 )
+
 -- Screenshot
 hl.bind(
 	"PRINT",
@@ -74,8 +74,27 @@ hl.bind(
 	hl.dsp.window.fullscreen({ mode = "maximized" }),
 	{ description = "Toggle maximized window" }
 )
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen(), {description = "Toogle fullscreen window"})
-hl.bind(mainMod .. " + V", hl.dsp.window.float(), { description = "Toggle floating" })
+hl.bind(
+	mainMod .. " + SHIFT + F",
+	hl.dsp.window.fullscreen(),
+	{ description = "Toggle fullscreen window" }
+)
+-- hl.bind(mainMod .. " + V", hl.dsp.window.float(), { description = "Toggle floating" })
+hl.bind(mainMod .. " + V", function()
+	local win = hl.get_active_window()
+	if not win then
+		return
+	end
+	-- Check if the window is currently floating
+	if win.floating then
+		-- If it's already floating, just toggle it back to tiling mode
+		hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+	else
+		hl.dispatch(hl.dsp.window.float())
+		hl.dispatch(hl.dsp.window.center())
+		hl.dispatch(hl.dsp.window.resize({ x = 1280, y = 650 }))
+	end
+end)
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo(), { description = "Toggle pseudotiling" })
 
 -- Move focus with mainMod + arrow keys
